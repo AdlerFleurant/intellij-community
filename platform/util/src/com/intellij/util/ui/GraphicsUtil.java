@@ -20,21 +20,25 @@ import com.intellij.openapi.util.SystemInfo;
 import com.intellij.util.MethodInvocator;
 import com.intellij.util.PairConsumer;
 import org.jetbrains.annotations.NotNull;
-import sun.swing.SwingUtilities2;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
 import java.util.Map;
+
+//TODO: this class was modified to be compiled. Expectations is that at some point it will fail and we will know better.
 
 /**
  * @author Konstantin Bulenkov
  */
 public class GraphicsUtil {
-  private static final MethodInvocator ourSafelyGetGraphicsMethod = new MethodInvocator(JComponent.class, "safelyGetGraphics", Component.class);
+  private static final MethodInvocator ourSafelyGetGraphicsMethod =
+    new MethodInvocator(JComponent.class, "safelyGetGraphics", Component.class);
 
   @SuppressWarnings("UndesirableClassUsage")
-  private static final Graphics2D ourGraphics = new BufferedImage(1,1,BufferedImage.TYPE_INT_ARGB).createGraphics();
+  private static final Graphics2D ourGraphics = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB).createGraphics();
+
   static {
     setupFractionalMetrics(ourGraphics);
     setupAntialiasing(ourGraphics, true, true);
@@ -57,11 +61,11 @@ public class GraphicsUtil {
     return ourGraphics.getFontMetrics(font).charsWidth(data, off, len);
   }
 
-  public static int charWidth(char ch,Font font) {
+  public static int charWidth(char ch, Font font) {
     return ourGraphics.getFontMetrics(font).charWidth(ch);
   }
 
-  public static int charWidth(int ch,Font font) {
+  public static int charWidth(int ch, Font font) {
     return ourGraphics.getFontMetrics(font).charWidth(ch);
   }
 
@@ -128,22 +132,28 @@ public class GraphicsUtil {
   }
 
   public static Object getAntialiasingType(@NotNull JComponent list) {
-    return SystemInfo.IS_AT_LEAST_JAVA9 ? null : list.getClientProperty(SwingUtilities2.AA_TEXT_PROPERTY_KEY);
+    return SystemInfo.IS_AT_LEAST_JAVA9 ? null : list.getClientProperty(RenderingHints.KEY_TEXT_ANTIALIASING);
   }
 
   public static void setAntialiasingType(@NotNull JComponent list, Object type) {
     if (!SystemInfo.IS_AT_LEAST_JAVA9) {
-      list.putClientProperty(SwingUtilities2.AA_TEXT_PROPERTY_KEY, type);
+      list.putClientProperty(RenderingHints.KEY_TEXT_ANTIALIASING, type);
     }
   }
 
   public static void generatePropertiesForAntialiasing(Object type, @NotNull PairConsumer<Object, Object> propertySetter) {
     if (!SystemInfo.IS_AT_LEAST_JAVA9) {
-      propertySetter.consume(SwingUtilities2.AA_TEXT_PROPERTY_KEY, type);
+      propertySetter.consume(RenderingHints.KEY_TEXT_ANTIALIASING, type);
     }
   }
 
   public static Object createAATextInfo(@NotNull Object hint) {
-    return SystemInfo.IS_AT_LEAST_JAVA9 ? null : new SwingUtilities2.AATextInfo(hint, UIUtil.getLcdContrastValue());
+    Map<RenderingHints.Key, Object> hints = new HashMap<>();
+
+    hints.put(RenderingHints.KEY_TEXT_ANTIALIASING, hint);
+    hints.put(RenderingHints.KEY_TEXT_LCD_CONTRAST, UIUtil.getLcdContrastValue());
+
+
+    return SystemInfo.IS_AT_LEAST_JAVA9 ? null : new RenderingHints(hints);
   }
 }
