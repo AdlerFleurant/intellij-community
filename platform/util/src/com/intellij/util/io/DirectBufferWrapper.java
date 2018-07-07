@@ -18,10 +18,6 @@ package com.intellij.util.io;
 import com.intellij.ReviseWhenPortedToJDK;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.SystemInfo;
-import com.intellij.util.concurrency.AtomicFieldUpdater;
-import sun.misc.Cleaner;
-import sun.misc.Unsafe;
-import sun.nio.ch.DirectBuffer;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,6 +28,16 @@ abstract class DirectBufferWrapper extends ByteBufferWrapper {
   protected static final Logger LOG = Logger.getInstance("#com.intellij.util.io.DirectBufferWrapper");
 
   private volatile ByteBuffer myBuffer;
+  private static Method cleanMethod;
+
+  static {
+    try {
+      cleanMethod = Class.forName("java.lang.ref.Cleaner$Cleanable").getDeclaredMethod("clean");
+    }
+    catch (ClassNotFoundException | NoSuchMethodException e) {
+      throw new Error(e);
+    }
+  }
 
   DirectBufferWrapper(final File file, final long offset, final long length) {
     super(file, offset, length);
@@ -67,11 +73,12 @@ abstract class DirectBufferWrapper extends ByteBufferWrapper {
     if (SystemInfo.IS_AT_LEAST_JAVA9) {
       // in JDK9 the "official" dispose method is sun.misc.Unsafe#invokeCleaner
       // since we have to target both jdk 8 and 9 we have to use reflection
-      Unsafe unsafe = AtomicFieldUpdater.getUnsafe();
+      //TODO: check this later
       try {
-        Method invokeCleaner = unsafe.getClass().getMethod("invokeCleaner", ByteBuffer.class);
-        invokeCleaner.setAccessible(true);
-        invokeCleaner.invoke(unsafe, buffer);
+        Method cleanerMethod = buffer.getClass().getMethod("cleaner");
+
+        Object cleaner = cleanerMethod.invoke("cleaner");
+        cleanMethod.invoke(cleaner);
         return true;
       }
       catch (Exception e) {
@@ -80,13 +87,6 @@ abstract class DirectBufferWrapper extends ByteBufferWrapper {
         throw new RuntimeException(e);
       }
     }
-    try {
-      Cleaner cleaner = ((DirectBuffer)buffer).cleaner();
-      if (cleaner != null) cleaner.clean(); // Already cleaned otherwise
-      return true;
-    }
-    catch (Throwable e) {
-      return false;
-    }
+    return false;
   }
 }
