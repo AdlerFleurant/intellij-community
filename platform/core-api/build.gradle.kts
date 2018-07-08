@@ -1,0 +1,35 @@
+plugins {
+  `java-library`
+}
+
+configure<JavaPluginConvention> {
+  sourceCompatibility = JavaVersion.VERSION_1_10
+  targetCompatibility = JavaVersion.VERSION_1_10
+
+  val sourceSet = sourceSets["main"]
+  sourceSet.java.srcDirs.clear()
+  sourceSet.java.srcDir("src")
+  sourceSet.resources.srcDirs.clear()
+}
+
+repositories {
+  jcenter()
+  maven("http://dl.bintray.com/jetbrains/intellij-third-party-dependencies")
+}
+
+tasks {
+  "compileJava"(JavaCompile::class) {
+    options.encoding = "UTF-8"
+  }
+}
+
+dependencies {
+  api(project(":intellij.platform.util"))
+  api(project(":intellij.platform.extensions"))
+  api(project(":intellij.platform.resources.en"))
+  api("org.picocontainer", "picocontainer", "1.2")
+
+  implementation(project(":intellij.platform.resources.en"))
+  implementation("dk.brics", "automaton", "1.12-1")
+  implementation("org.jetbrains.intellij.deps", "jdom", "2.0.6")
+}
