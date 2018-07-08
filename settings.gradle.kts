@@ -13,7 +13,8 @@ include(
   "intellij.java.guiForms.rt",
   "intellij.platform.icons",
   "intellij.platform.jps.model",
-  "intellij.platform.projectModel"
+  "intellij.platform.projectModel",
+  "intellij.platform.indexing"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -27,3 +28,4 @@ project(":intellij.java.guiForms.rt").projectDir = file("platform/forms_rt")
 project(":intellij.platform.icons").projectDir = file("platform/icons")
 project(":intellij.platform.jps.model").projectDir = file("jps/model-api")
 project(":intellij.platform.projectModel").projectDir = file("platform/projectModel-api")
+project(":intellij.platform.indexing").projectDir = file("platform/indexing-api")
