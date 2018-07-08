@@ -15,7 +15,8 @@ include(
   "intellij.platform.jps.model",
   "intellij.platform.projectModel",
   "intellij.platform.indexing",
-  "intellij.platform.boot"
+  "intellij.platform.boot",
+  "intellij.platform.editor"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -31,3 +32,4 @@ project(":intellij.platform.jps.model").projectDir = file("jps/model-api")
 project(":intellij.platform.projectModel").projectDir = file("platform/projectModel-api")
 project(":intellij.platform.indexing").projectDir = file("platform/indexing-api")
 project(":intellij.platform.boot").projectDir = file("platform/boot")
+project(":intellij.platform.editor").projectDir = file("platform/editor-ui-api")
