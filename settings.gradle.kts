@@ -10,7 +10,8 @@ include(
   "intellij.platform.core",
   "intellij.platform.core.impl",
   "intellij.platform.bootstrap",
-  "intellij.java.guiForms.rt"
+  "intellij.java.guiForms.rt",
+  "intellij.platform.icons"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -21,3 +22,4 @@ project(":intellij.platform.core").projectDir = file("platform/core-api")
 project(":intellij.platform.core.impl").projectDir = file("platform/core-impl")
 project(":intellij.platform.bootstrap").projectDir = file("platform/bootstrap")
 project(":intellij.java.guiForms.rt").projectDir = file("platform/forms_rt")
+project(":intellij.platform.icons").projectDir = file("platform/icons")
