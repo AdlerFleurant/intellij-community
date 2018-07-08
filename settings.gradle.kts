@@ -16,7 +16,8 @@ include(
   "intellij.platform.projectModel",
   "intellij.platform.indexing",
   "intellij.platform.boot",
-  "intellij.platform.editor"
+  "intellij.platform.editor",
+  "intellij.platform.analysis"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -33,3 +34,4 @@ project(":intellij.platform.projectModel").projectDir = file("platform/projectMo
 project(":intellij.platform.indexing").projectDir = file("platform/indexing-api")
 project(":intellij.platform.boot").projectDir = file("platform/boot")
 project(":intellij.platform.editor").projectDir = file("platform/editor-ui-api")
+project(":intellij.platform.analysis").projectDir = file("platform/analysis-api")
