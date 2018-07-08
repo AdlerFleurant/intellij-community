@@ -19,7 +19,8 @@ include(
   "intellij.platform.editor",
   "intellij.platform.analysis",
   "intellij.tools.jetCheck",
-  "intellij.java.rt"
+  "intellij.java.rt",
+  "intellij.platform.vcs.log.graph"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -39,3 +40,4 @@ project(":intellij.platform.editor").projectDir = file("platform/editor-ui-api")
 project(":intellij.platform.analysis").projectDir = file("platform/analysis-api")
 project(":intellij.tools.jetCheck").projectDir = file("jetCheck")
 project(":intellij.java.rt").projectDir = file("java/java-runtime")
+project(":intellij.platform.vcs.log.graph").projectDir = file("platform/vcs-log/graph-api")
