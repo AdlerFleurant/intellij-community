@@ -18,7 +18,8 @@ include(
   "intellij.platform.boot",
   "intellij.platform.editor",
   "intellij.platform.analysis",
-  "intellij.tools.jetCheck"
+  "intellij.tools.jetCheck",
+  "intellij.java.rt"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -37,3 +38,4 @@ project(":intellij.platform.boot").projectDir = file("platform/boot")
 project(":intellij.platform.editor").projectDir = file("platform/editor-ui-api")
 project(":intellij.platform.analysis").projectDir = file("platform/analysis-api")
 project(":intellij.tools.jetCheck").projectDir = file("jetCheck")
+project(":intellij.java.rt").projectDir = file("java/java-runtime")
