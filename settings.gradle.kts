@@ -17,7 +17,8 @@ include(
   "intellij.platform.indexing",
   "intellij.platform.boot",
   "intellij.platform.editor",
-  "intellij.platform.analysis"
+  "intellij.platform.analysis",
+  "intellij.tools.jetCheck"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -35,3 +36,4 @@ project(":intellij.platform.indexing").projectDir = file("platform/indexing-api"
 project(":intellij.platform.boot").projectDir = file("platform/boot")
 project(":intellij.platform.editor").projectDir = file("platform/editor-ui-api")
 project(":intellij.platform.analysis").projectDir = file("platform/analysis-api")
+project(":intellij.tools.jetCheck").projectDir = file("jetCheck")
