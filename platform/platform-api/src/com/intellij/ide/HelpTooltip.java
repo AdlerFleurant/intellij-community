@@ -32,7 +32,6 @@ import com.intellij.util.ui.JBEmptyBorder;
 import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.UIUtil;
 import org.jetbrains.annotations.NotNull;
-import sun.swing.SwingUtilities2;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -506,10 +505,10 @@ public class HelpTooltip implements Disposable {
 
       // Compute preferred size
       FontMetrics tfm = getFontMetrics(titleFont);
-      int titleWidth = SwingUtilities2.stringWidth(this, tfm, title);
+      int titleWidth = SwingUtilities.computeStringWidth(tfm, title);
 
       FontMetrics fm = getFontMetrics(font);
-      titleWidth += StringUtil.isNotEmpty(shortcut) ? hgap() + SwingUtilities2.stringWidth(this, fm, shortcut) : 0;
+      titleWidth += StringUtil.isNotEmpty(shortcut) ? hgap() + SwingUtilities.computeStringWidth(fm, shortcut) : 0;
 
       boolean limitWidth = StringUtil.isNotEmpty(description) || link != null;
       isMultiline = limitWidth && (titleWidth > maxWidth());

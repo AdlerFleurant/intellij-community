@@ -45,7 +45,6 @@ import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import sun.swing.SwingUtilities2;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -163,7 +162,7 @@ public abstract class DialogWrapper {
   protected JComponent myPreferredFocusedComponent;
   private Computable<Point> myInitialLocationCallback;
 
-  private Dimension  myActualSize = null;
+  private Dimension myActualSize = null;
 
   private List<ValidationInfo> myInfo = Collections.emptyList();
 
@@ -221,8 +220,13 @@ public abstract class DialogWrapper {
     this(project, null, canBeParent, ideModalityType);
   }
 
-  protected DialogWrapper(@Nullable Project project, @Nullable Component parentComponent, boolean canBeParent, @NotNull IdeModalityType ideModalityType) {
-    myPeer = parentComponent == null ? createPeer(project, canBeParent, project == null ? IdeModalityType.IDE : ideModalityType) : createPeer(parentComponent, canBeParent);
+  protected DialogWrapper(@Nullable Project project,
+                          @Nullable Component parentComponent,
+                          boolean canBeParent,
+                          @NotNull IdeModalityType ideModalityType) {
+    myPeer = parentComponent == null
+             ? createPeer(project, canBeParent, project == null ? IdeModalityType.IDE : ideModalityType)
+             : createPeer(parentComponent, canBeParent);
     final Window window = myPeer.getWindow();
     if (window != null) {
       myResizeListener = new ComponentAdapter() {
@@ -649,7 +653,7 @@ public abstract class DialogWrapper {
       }
 
 
-      if(eastPanel != null) {
+      if (eastPanel != null) {
         leftPanel.add(eastPanel, BorderLayout.EAST);
       }
 
@@ -687,7 +691,8 @@ public abstract class DialogWrapper {
 
       buttonsPanel.add(button);
       if (i < buttons.size() - 1) {
-        int gap = UIUtil.isUnderDarcula() || UIUtil.isUnderIntelliJLaF() ? BASE_BUTTON_GAP.get() - insets.left - insets.right : JBUI.scale(8);
+        int gap =
+          UIUtil.isUnderDarcula() || UIUtil.isUnderIntelliJLaF() ? BASE_BUTTON_GAP.get() - insets.left - insets.right : JBUI.scale(8);
         buttonsPanel.add(Box.createRigidArea(new Dimension(gap, 0)));
       }
     }
@@ -706,7 +711,6 @@ public abstract class DialogWrapper {
   }
 
   /**
-   *
    * @param action should be registered to find corresponding JButton
    * @return button for specified action or null if it's not found
    */
@@ -831,7 +835,8 @@ public abstract class DialogWrapper {
   @NotNull
   protected DialogWrapperPeer createPeer(final Window owner, final boolean canBeParent, final boolean applicationModalIfPossible) {
     return DialogWrapperPeerFactory.getInstance()
-      .createPeer(this, owner, canBeParent, applicationModalIfPossible ? IdeModalityType.IDE : IdeModalityType.PROJECT);
+                                   .createPeer(this, owner, canBeParent,
+                                               applicationModalIfPossible ? IdeModalityType.IDE : IdeModalityType.PROJECT);
   }
 
   @NotNull
@@ -1305,7 +1310,8 @@ public abstract class DialogWrapper {
       centerSection.add(centerPanel, BorderLayout.CENTER);
     }
 
-    boolean isVisualPaddingCompensatedOnComponentLevel = centerPanel == null || centerPanel.getClientProperty("isVisualPaddingCompensatedOnComponentLevel") == null;
+    boolean isVisualPaddingCompensatedOnComponentLevel =
+      centerPanel == null || centerPanel.getClientProperty("isVisualPaddingCompensatedOnComponentLevel") == null;
     if (isVisualPaddingCompensatedOnComponentLevel) {
       // see comment about visual paddings in the MigLayoutBuilder.build
       root.setBorder(createContentPaneBorder());
@@ -1457,8 +1463,8 @@ public abstract class DialogWrapper {
   /**
    * Sets margin for command buttons ("OK", "Cancel", "Help").
    *
-   * @Deprecated Button margins aren't used anymore. Button style is standardized.
    * @param insets buttons margin
+   * @Deprecated Button margins aren't used anymore. Button style is standardized.
    */
   @Deprecated
   public final void setButtonsMargin(@Nullable Insets insets) {}
@@ -1523,7 +1529,8 @@ public abstract class DialogWrapper {
   /**
    * @return the help identifier or null if no help is available.
    */
-  @Nullable @NonNls
+  @Nullable
+  @NonNls
   protected String getHelpId() {
     return null;
   }
@@ -1742,19 +1749,18 @@ public abstract class DialogWrapper {
   }
 
   /**
-   *
    * @return null if we should ignore <Esc> for window closing
    */
   @Nullable
   protected ActionListener createCancelAction() {
     return new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-          if (!PopupUtil.handleEscKeyEvent()) {
-            doCancelAction(e);
-          }
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        if (!PopupUtil.handleEscKeyEvent()) {
+          doCancelAction(e);
         }
-      };
+      }
+    };
   }
 
   private void focusButton(boolean next) {
@@ -1772,9 +1778,9 @@ public abstract class DialogWrapper {
     int start = !next && currentIndex == -1 ? components.size() : currentIndex;
 
     return IntStream.range(0, components.size())
-      .map(i -> (next ? start + i + 1 : start + components.size() - i - 1) % components.size())
-      .filter(i -> components.get(i).isEnabled())
-      .findFirst();
+                    .map(i -> (next ? start + i + 1 : start + components.size() - i - 1) % components.size())
+                    .filter(i -> components.get(i).isEnabled())
+                    .findFirst();
   }
 
   public long getTypeAheadTimeoutMs() {
@@ -1879,7 +1885,7 @@ public abstract class DialogWrapper {
         }
 
         startTrackingValidation();
-        if(infoList.stream().anyMatch(info1 -> info1.disableOk)) return;
+        if (infoList.stream().anyMatch(info1 -> info1.disableOk)) return;
       }
       doOKAction();
     }
@@ -1953,6 +1959,7 @@ public abstract class DialogWrapper {
    * Use this method only in circumstances when the exact invalid component is hard to
    * detect or the valid status is based on several fields. In other cases use
    * <code>{@link #setErrorText(String, JComponent)}</code> method.
+   *
    * @param text the error text to display
    */
   protected void setErrorText(@Nullable final String text) {
@@ -1961,8 +1968,8 @@ public abstract class DialogWrapper {
 
   protected void setErrorText(@Nullable final String text, @Nullable final JComponent component) {
     setErrorInfoAll((text == null) ?
-                 Collections.EMPTY_LIST :
-                 Collections.singletonList(new ValidationInfo(text, component)));
+                    Collections.EMPTY_LIST :
+                    Collections.singletonList(new ValidationInfo(text, component)));
   }
 
   protected void setErrorInfoAll(@NotNull List<ValidationInfo> info) {
@@ -1987,7 +1994,7 @@ public abstract class DialogWrapper {
     List<ValidationInfo> corrected = myInfo.stream().filter((vi) -> !info.contains(vi)).collect(Collectors.toList());
     if (Registry.is("ide.inplace.errors.outline")) {
       corrected.stream().filter(vi -> (vi.component != null && vi.component.getBorder() instanceof ErrorBorderCapable)).
-            forEach(vi -> vi.component.putClientProperty("JComponent.outline", null));
+        forEach(vi -> vi.component.putClientProperty("JComponent.outline", null));
     }
 
     if (Registry.is("ide.inplace.errors.balloon")) {
@@ -2027,19 +2034,19 @@ public abstract class DialogWrapper {
             setErrorTipText(vi.component, label, vi.message);
 
             BalloonBuilder balloonBuilder = JBPopupFactory.getInstance().createBalloonBuilder(label)
-              .setDisposable(getDisposable())
-              .setBorderInsets(UIManager.getInsets("Balloon.error.textInsets"))
-              .setPointerSize(new JBDimension(17, 6))
-              .setCornerToPointerDistance(JBUI.scale(30))
-              .setHideOnKeyOutside(false)
-              .setHideOnClickOutside(false)
-              .setHideOnAction(false)
-              .setBorderColor(BALLOON_ERROR_BORDER)
-              .setFillColor(BALLOON_ERROR_BACKGROUND)
-              .setHideOnFrameResize(false)
-              .setRequestFocus(false)
-              .setAnimationCycle(100)
-              .setShadow(true);
+                                                          .setDisposable(getDisposable())
+                                                          .setBorderInsets(UIManager.getInsets("Balloon.error.textInsets"))
+                                                          .setPointerSize(new JBDimension(17, 6))
+                                                          .setCornerToPointerDistance(JBUI.scale(30))
+                                                          .setHideOnKeyOutside(false)
+                                                          .setHideOnClickOutside(false)
+                                                          .setHideOnAction(false)
+                                                          .setBorderColor(BALLOON_ERROR_BORDER)
+                                                          .setFillColor(BALLOON_ERROR_BACKGROUND)
+                                                          .setHideOnFrameResize(false)
+                                                          .setRequestFocus(false)
+                                                          .setAnimationCycle(100)
+                                                          .setShadow(true);
 
             vi.component.putClientProperty("JComponent.error.balloon.builder", balloonBuilder);
 
@@ -2051,13 +2058,15 @@ public abstract class DialogWrapper {
             fc.addFocusListener(fl);
             Disposer.register(getDisposable(), () -> fc.removeFocusListener(fl));
           }
-        } else {
+        }
+        else {
           SwingUtilities.invokeLater(() -> myErrorText.appendError(vi.message));
         }
       }
-    } else if (!myInfo.isEmpty()) {
+    }
+    else if (!myInfo.isEmpty()) {
       Runnable updateErrorTextRunnable = () -> {
-        for (ValidationInfo vi: myInfo) {
+        for (ValidationInfo vi : myInfo) {
           myErrorText.appendError(vi.message);
         }
       };
@@ -2079,7 +2088,7 @@ public abstract class DialogWrapper {
 
   private void setErrorTipText(JComponent component, JLabel label, String text) {
     Insets insets = UIManager.getInsets("Balloon.error.textInsets");
-    int oneLineWidth = SwingUtilities2.stringWidth(label, label.getFontMetrics(label.getFont()), text);
+    int oneLineWidth = SwingUtilities.computeStringWidth(label.getFontMetrics(label.getFont()), text);
     int textWidth = getRootPane().getWidth() - component.getX() - insets.left - insets.right - JBUI.scale(30);
     if (textWidth < JBUI.scale(90)) textWidth = JBUI.scale(90);
     if (textWidth > oneLineWidth) textWidth = oneLineWidth;
@@ -2091,7 +2100,8 @@ public abstract class DialogWrapper {
   private Component getFocusable(Component source) {
     return source instanceof JComboBox && !((JComboBox)source).isEditable() ?
            source :
-           UIUtil.uiTraverser(source).filter(c -> c instanceof JTextComponent && c.isFocusable()).toList().stream().findFirst().orElse(null);
+           UIUtil.uiTraverser(source).filter(c -> c instanceof JTextComponent && c.isFocusable()).toList().stream().findFirst()
+                 .orElse(null);
   }
 
   private void updateSize() {
@@ -2192,9 +2202,11 @@ public abstract class DialogWrapper {
     private boolean isTextSet(@NotNull List<ValidationInfo> info) {
       if (info.isEmpty()) {
         return errors.isEmpty();
-      } else if (errors.size() == info.size()){
+      }
+      else if (errors.size() == info.size()) {
         return errors.equals(info.stream().map(i -> i.message).collect(Collectors.toList()));
-      } else {
+      }
+      else {
         return false;
       }
     }
@@ -2212,7 +2224,8 @@ public abstract class DialogWrapper {
    */
   private static void ensureEventDispatchThread() {
     if (!EventQueue.isDispatchThread()) {
-      throw new IllegalStateException("The DialogWrapper can only be used in event dispatch thread. Current thread: "+Thread.currentThread());
+      throw new IllegalStateException(
+        "The DialogWrapper can only be used in event dispatch thread. Current thread: " + Thread.currentThread());
     }
   }
 
@@ -2284,7 +2297,7 @@ public abstract class DialogWrapper {
 
     /**
      * @param toBeShown - if dialog should be shown next time (checkbox selected -> false)
-     * @param exitCode of corresponding DialogWrapper
+     * @param exitCode  of corresponding DialogWrapper
      */
     void setToBeShown(boolean toBeShown, int exitCode);
 
@@ -2330,7 +2343,8 @@ public abstract class DialogWrapper {
                 //noinspection UseJBColor
                 g2.setColor(new Color(255, 0, 0, 100));
                 g2.fillRoundRect(p.x, p.y - 2, w, 4, 2, 2);
-              } finally {
+              }
+              finally {
                 g2.dispose();
               }
               break;
@@ -2357,7 +2371,8 @@ public abstract class DialogWrapper {
       this.y = y;
     }
 
-    @Override public RelativePoint recalculateLocation(Balloon balloon) {
+    @Override
+    public RelativePoint recalculateLocation(Balloon balloon) {
       int width = getComponent().getWidth();
       int delta = width < JBUI.scale(120) ? width / 2 : JBUI.scale(60);
       return new RelativePoint(getComponent(), new Point(delta, y));
@@ -2365,8 +2380,8 @@ public abstract class DialogWrapper {
   }
 
   private class ErrorFocusListener implements FocusListener {
-    private final JLabel     label;
-    private final String     text;
+    private final JLabel label;
+    private final String text;
     private final JComponent component;
 
     private ErrorFocusListener(JLabel label, String text, JComponent component) {
@@ -2375,14 +2390,16 @@ public abstract class DialogWrapper {
       this.component = component;
     }
 
-    @Override public void focusGained(FocusEvent e) {
+    @Override
+    public void focusGained(FocusEvent e) {
       Balloon b = (Balloon)component.getClientProperty("JComponent.error.balloon");
       if (b == null || b.isDisposed()) {
         showErrorTip();
       }
     }
 
-    @Override public void focusLost(FocusEvent e) {
+    @Override
+    public void focusLost(FocusEvent e) {
       Balloon b = (Balloon)component.getClientProperty("JComponent.error.balloon");
       if (b != null && !b.isDisposed()) {
         b.hide();
@@ -2396,7 +2413,8 @@ public abstract class DialogWrapper {
       Balloon balloon = balloonBuilder.createBalloon();
 
       ComponentListener rl = new ComponentAdapter() {
-        @Override public void componentResized(ComponentEvent e) {
+        @Override
+        public void componentResized(ComponentEvent e) {
           if (!balloon.isDisposed()) {
             setErrorTipText(component, label, text);
             balloon.revalidate();
@@ -2405,7 +2423,8 @@ public abstract class DialogWrapper {
       };
 
       balloon.addListener(new JBPopupListener() {
-        @Override public void onClosed(LightweightWindowEvent event) {
+        @Override
+        public void onClosed(LightweightWindowEvent event) {
           JRootPane rootPane = getRootPane();
           if (rootPane != null) {
             rootPane.removeComponentListener(rl);
@@ -2423,10 +2442,11 @@ public abstract class DialogWrapper {
       Dimension bSize = balloon.getPreferredSize();
 
       Insets cInsets = component.getInsets();
-      int top =  cInsets != null ? cInsets.top : 0;
+      int top = cInsets != null ? cInsets.top : 0;
       if (componentPos.y >= bSize.height + top) {
         balloon.show(new ErrorTipTracker(component, 0), Balloon.Position.above);
-      } else {
+      }
+      else {
         balloon.show(new ErrorTipTracker(component, component.getHeight()), Balloon.Position.below);
       }
       component.putClientProperty("JComponent.error.balloon", balloon);
@@ -2436,5 +2456,4 @@ public abstract class DialogWrapper {
   private enum ErrorPaintingType {DOT, SIGN, LINE}
 
   public enum DialogStyle {NO_STYLE, COMPACT}
-
 }

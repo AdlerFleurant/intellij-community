@@ -20,7 +20,8 @@ include(
   "intellij.platform.analysis",
   "intellij.tools.jetCheck",
   "intellij.java.rt",
-  "intellij.platform.vcs.log.graph"
+  "intellij.platform.vcs.log.graph",
+  "intellij.platform.ide"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -41,3 +42,4 @@ project(":intellij.platform.analysis").projectDir = file("platform/analysis-api"
 project(":intellij.tools.jetCheck").projectDir = file("jetCheck")
 project(":intellij.java.rt").projectDir = file("java/java-runtime")
 project(":intellij.platform.vcs.log.graph").projectDir = file("platform/vcs-log/graph-api")
+project(":intellij.platform.ide").projectDir = file("platform/platform-api")
