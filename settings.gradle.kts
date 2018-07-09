@@ -22,7 +22,8 @@ include(
   "intellij.java.rt",
   "intellij.platform.vcs.log.graph",
   "intellij.platform.ide",
-  "intellij.platform.lvcs"
+  "intellij.platform.lvcs",
+  "intellij.platform.diff"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -45,3 +46,4 @@ project(":intellij.java.rt").projectDir = file("java/java-runtime")
 project(":intellij.platform.vcs.log.graph").projectDir = file("platform/vcs-log/graph-api")
 project(":intellij.platform.ide").projectDir = file("platform/platform-api")
 project(":intellij.platform.lvcs").projectDir = file("platform/lvcs-api")
+project(":intellij.platform.diff").projectDir = file("platform/diff-api")
