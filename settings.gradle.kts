@@ -23,7 +23,8 @@ include(
   "intellij.platform.vcs.log.graph",
   "intellij.platform.ide",
   "intellij.platform.lvcs",
-  "intellij.platform.diff"
+  "intellij.platform.diff",
+  "intellij.platform.lang"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -47,3 +48,4 @@ project(":intellij.platform.vcs.log.graph").projectDir = file("platform/vcs-log/
 project(":intellij.platform.ide").projectDir = file("platform/platform-api")
 project(":intellij.platform.lvcs").projectDir = file("platform/lvcs-api")
 project(":intellij.platform.diff").projectDir = file("platform/diff-api")
+project(":intellij.platform.lang").projectDir = file("platform/lang-api")

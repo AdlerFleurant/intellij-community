@@ -231,20 +231,20 @@ public abstract class ModuleBuilder extends AbstractModuleBuilder {
   }
 
   @NotNull
-  public Module createModule(@NotNull ModifiableModuleModel moduleModel)
+  public com.intellij.openapi.module.Module createModule(@NotNull ModifiableModuleModel moduleModel)
     throws InvalidDataException, IOException, ModuleWithNameAlreadyExists, JDOMException, ConfigurationException {
     LOG.assertTrue(myName != null);
     LOG.assertTrue(myModuleFilePath != null);
 
     deleteModuleFile(myModuleFilePath);
     final ModuleType moduleType = getModuleType();
-    final Module module = moduleModel.newModule(myModuleFilePath, moduleType.getId());
+    final com.intellij.openapi.module.Module module = moduleModel.newModule(myModuleFilePath, moduleType.getId());
     setupModule(module);
 
     return module;
   }
 
-  protected void setupModule(Module module) throws ConfigurationException {
+  protected void setupModule(com.intellij.openapi.module.Module module) throws ConfigurationException {
     final ModifiableRootModel modifiableModel = ModuleRootManager.getInstance(module).getModifiableModel();
     setupRootModel(modifiableModel);
     for (ModuleConfigurationUpdater updater : myUpdaters) {
@@ -254,7 +254,7 @@ public abstract class ModuleBuilder extends AbstractModuleBuilder {
     setProjectType(module);
   }
 
-  private void onModuleInitialized(final Module module) {
+  private void onModuleInitialized(final com.intellij.openapi.module.Module module) {
     myDispatcher.getMulticaster().moduleCreated(module);
   }
 
@@ -266,7 +266,7 @@ public abstract class ModuleBuilder extends AbstractModuleBuilder {
     return null;
   }
 
-  protected void setProjectType(Module module) {
+  protected void setProjectType(com.intellij.openapi.module.Module module) {
     ProjectType projectType = getProjectType();
     if (projectType != null && ProjectTypeService.getProjectType(module.getProject()) == null) {
       ProjectTypeService.setProjectType(module.getProject(), projectType);
@@ -274,10 +274,10 @@ public abstract class ModuleBuilder extends AbstractModuleBuilder {
   }
 
   @NotNull
-  public Module createAndCommitIfNeeded(@NotNull Project project, @Nullable ModifiableModuleModel model, boolean runFromProjectWizard)
+  public com.intellij.openapi.module.Module createAndCommitIfNeeded(@NotNull Project project, @Nullable ModifiableModuleModel model, boolean runFromProjectWizard)
     throws InvalidDataException, ConfigurationException, IOException, JDOMException, ModuleWithNameAlreadyExists {
     final ModifiableModuleModel moduleModel = model != null ? model : ModuleManager.getInstance(project).getModifiableModel();
-    final Module module = createModule(moduleModel);
+    final com.intellij.openapi.module.Module module = createModule(moduleModel);
     if (model == null) moduleModel.commit();
 
     if (runFromProjectWizard) {
@@ -304,13 +304,13 @@ public abstract class ModuleBuilder extends AbstractModuleBuilder {
 
   @Override
   @Nullable
-  public List<Module> commit(@NotNull final Project project, final ModifiableModuleModel model, final ModulesProvider modulesProvider) {
-    final Module module = commitModule(project, model);
+  public List<com.intellij.openapi.module.Module> commit(@NotNull final Project project, final ModifiableModuleModel model, final ModulesProvider modulesProvider) {
+    final com.intellij.openapi.module.Module module = commitModule(project, model);
     return module != null ? Collections.singletonList(module) : null;
   }
 
   @Nullable
-  public Module commitModule(@NotNull final Project project, @Nullable final ModifiableModuleModel model) {
+  public com.intellij.openapi.module.Module commitModule(@NotNull final Project project, @Nullable final ModifiableModuleModel model) {
     if (canCreateModule()) {
       if (myName == null) {
         myName = project.getName();
@@ -320,7 +320,7 @@ public abstract class ModuleBuilder extends AbstractModuleBuilder {
       }
       try {
         return ApplicationManager.getApplication().runWriteAction(
-          (ThrowableComputable<Module, Exception>)() -> createAndCommitIfNeeded(project, model, true));
+          (ThrowableComputable<com.intellij.openapi.module.Module, Exception>)() -> createAndCommitIfNeeded(project, model, true));
       }
       catch (Exception ex) {
         LOG.warn(ex);
@@ -386,7 +386,7 @@ public abstract class ModuleBuilder extends AbstractModuleBuilder {
 
   public static abstract class ModuleConfigurationUpdater {
 
-    public abstract void update(@NotNull Module module, @NotNull ModifiableRootModel rootModel);
+    public abstract void update(@NotNull com.intellij.openapi.module.Module module, @NotNull ModifiableRootModel rootModel);
 
   }
 }
