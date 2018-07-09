@@ -14,7 +14,6 @@
 package com.intellij.ui;
 
 import com.intellij.util.ui.JBInsets;
-import sun.awt.AWTAccessor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -110,8 +109,8 @@ public class CellRendererPanel extends JPanel {
   static void reshapeImpl(JComponent component, int x, int y, int w, int h) {
     // suppress per-cell "moved" and "resized" events on paint
     // see Component#setBounds, Component#notifyNewBounds
-    AWTAccessor.getComponentAccessor().setLocation(component, x, y);
-    AWTAccessor.getComponentAccessor().setSize(component, w, h);
+    component.setLocation(x, y);
+    component.setSize(w, h);
   }
 
   public void invalidate() {
