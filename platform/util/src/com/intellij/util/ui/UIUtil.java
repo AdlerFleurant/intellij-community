@@ -23,8 +23,6 @@ import com.intellij.util.ui.accessibility.ScreenReader;
 import org.intellij.lang.annotations.JdkConstants;
 import org.intellij.lang.annotations.Language;
 import org.jetbrains.annotations.*;
-import sun.awt.HeadlessToolkit;
-import sun.java2d.SunGraphicsEnvironment;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -527,11 +525,11 @@ public class UIUtil {
       if (SystemInfo.isJetBrainsJvm) {
         try {
           GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-          if (ge instanceof SunGraphicsEnvironment) {
-            Method m = ReflectionUtil.getDeclaredMethod(SunGraphicsEnvironment.class, "isUIScaleOn");
-            jreHiDPI.set(m != null && (Boolean)m.invoke(ge));
+          //if (ge instanceof SunGraphicsEnvironment) {
+            //Method m = ReflectionUtil.getDeclaredMethod(SunGraphicsEnvironment.class, "isUIScaleOn");
+            jreHiDPI.set(false);//(m != null && (Boolean)m.invoke(ge));
             jreHiDPI_earlierVersion = false;
-          }
+          //}
         }
         catch (Throwable ignore) {
         }
@@ -3410,7 +3408,7 @@ public class UIUtil {
   public static void fixFormattedField(JFormattedTextField field) {
     if (SystemInfo.isMac) {
       final Toolkit toolkit = Toolkit.getDefaultToolkit();
-      if (toolkit instanceof HeadlessToolkit) return;
+      if (GraphicsEnvironment.isHeadless()) return;
       final int commandKeyMask = toolkit.getMenuShortcutKeyMask();
       final InputMap inputMap = field.getInputMap();
       final KeyStroke copyKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_C, commandKeyMask);

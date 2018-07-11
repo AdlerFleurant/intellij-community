@@ -139,29 +139,31 @@ public class MacUtil {
 
   public static ID findWindowFromJavaWindow(final Window w) {
     ID windowId = null;
-    if (Registry.is("skip.untitled.windows.for.mac.messages")) {
-      try {
-        Class <?> cWindowPeerClass  = w.getPeer().getClass();
-        Method getPlatformWindowMethod = cWindowPeerClass.getDeclaredMethod("getPlatformWindow");
-        Object cPlatformWindow = getPlatformWindowMethod.invoke(w.getPeer());
-        Class <?> cPlatformWindowClass = cPlatformWindow.getClass();
-        Method getNSWindowPtrMethod = cPlatformWindowClass.getDeclaredMethod("getNSWindowPtr");
-        windowId = new ID((Long)getNSWindowPtrMethod.invoke(cPlatformWindow));
-      }
-      catch (NoSuchMethodException e) {
-        LOG.debug(e);
-      }
-      catch (InvocationTargetException e) {
-        LOG.debug(e);
-      }
-      catch (IllegalAccessException e) {
-        LOG.debug(e);
-      }
-    }
-    else {
+    //TODO: check these changes later.
+    //if (Registry.is("skip.untitled.windows.for.mac.messages")) {
+    //  try {
+    //    w.getPl
+    //    Class <?> cWindowPeerClass  = w.getPeer().getClass();
+    //    Method getPlatformWindowMethod = cWindowPeerClass.getDeclaredMethod("getPlatformWindow");
+    //    Object cPlatformWindow = getPlatformWindowMethod.invoke(w.getPeer());
+    //    Class <?> cPlatformWindowClass = cPlatformWindow.getClass();
+    //    Method getNSWindowPtrMethod = cPlatformWindowClass.getDeclaredMethod("getNSWindowPtr");
+    //    windowId = new ID((Long)getNSWindowPtrMethod.invoke(cPlatformWindow));
+    //  }
+    //  catch (NoSuchMethodException e) {
+    //    LOG.debug(e);
+    //  }
+    //  catch (InvocationTargetException e) {
+    //    LOG.debug(e);
+    //  }
+    //  catch (IllegalAccessException e) {
+    //    LOG.debug(e);
+    //  }
+    //}
+    //else {
       String foremostWindowTitle = getWindowTitle(w);
       windowId = findWindowForTitle(foremostWindowTitle);
-    }
+    //}
     return windowId;
   }
 
