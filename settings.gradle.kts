@@ -25,7 +25,8 @@ include(
   "intellij.platform.lvcs",
   "intellij.platform.diff",
   "intellij.platform.lang",
-  "intellij.platform.vcs.core"
+  "intellij.platform.vcs.core",
+  "intellij.platform.vcs"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -51,3 +52,4 @@ project(":intellij.platform.lvcs").projectDir = file("platform/lvcs-api")
 project(":intellij.platform.diff").projectDir = file("platform/diff-api")
 project(":intellij.platform.lang").projectDir = file("platform/lang-api")
 project(":intellij.platform.vcs.core").projectDir = file("platform/vcs-api/vcs-api-core")
+project(":intellij.platform.vcs").projectDir = file("platform/vcs-api")
