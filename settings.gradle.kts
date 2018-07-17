@@ -34,7 +34,8 @@ include(
   "intellij.java.psi.impl",
   "uast",
   "uast:uast-common",
-  "uast:uast-java"
+  "uast:uast-java",
+  "intellij.java.analysis"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -66,3 +67,4 @@ project(":intellij.jps.model.serialization").projectDir = file("jps/model-serial
 project(":intellij.platform.externalSystem.rt").projectDir = file("platform/external-system-rt")
 project(":intellij.java.psi").projectDir = file("java/java-psi-api")
 project(":intellij.java.psi.impl").projectDir = file("java/java-psi-impl")
+project(":intellij.java.analysis").projectDir = file("java/java-analysis-api")

@@ -9,4 +9,10 @@ allprojects {
     jcenter()
     maven("http://dl.bintray.com/jetbrains/intellij-third-party-dependencies")
   }
+
+  afterEvaluate {
+    tasks.withType(JavaCompile::class.java).all {
+      options.encoding = "UTF-8"
+    }
+  }
 }
