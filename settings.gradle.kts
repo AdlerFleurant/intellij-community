@@ -29,7 +29,8 @@ include(
   "intellij.platform.vcs",
   "intellij.java.resources.en",
   "intellij.jps.model.serialization",
-  "intellij.platform.externalSystem.rt"
+  "intellij.platform.externalSystem.rt",
+  "intellij.java.psi"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -59,3 +60,4 @@ project(":intellij.platform.vcs").projectDir = file("platform/vcs-api")
 project(":intellij.java.resources.en").projectDir = file("resources-en")
 project(":intellij.jps.model.serialization").projectDir = file("jps/model-serialization")
 project(":intellij.platform.externalSystem.rt").projectDir = file("platform/external-system-rt")
+project(":intellij.java.psi").projectDir = file("java/java-psi-api")
