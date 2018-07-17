@@ -31,7 +31,10 @@ include(
   "intellij.jps.model.serialization",
   "intellij.platform.externalSystem.rt",
   "intellij.java.psi",
-  "intellij.java.psi.impl"
+  "intellij.java.psi.impl",
+  "uast",
+  "uast:uast-common",
+  "uast:uast-java"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")

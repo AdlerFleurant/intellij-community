@@ -1,5 +1,3 @@
-apply plugin: 'de.undercouch.download'
-
 task updateDependencies {
   def downloadDir = new File(project.rootDir, "lib/download")
   downloadDir.mkdirs()
