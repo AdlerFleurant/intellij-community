@@ -30,7 +30,8 @@ include(
   "intellij.java.resources.en",
   "intellij.jps.model.serialization",
   "intellij.platform.externalSystem.rt",
-  "intellij.java.psi"
+  "intellij.java.psi",
+  "intellij.java.psi.impl"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -61,3 +62,4 @@ project(":intellij.java.resources.en").projectDir = file("resources-en")
 project(":intellij.jps.model.serialization").projectDir = file("jps/model-serialization")
 project(":intellij.platform.externalSystem.rt").projectDir = file("platform/external-system-rt")
 project(":intellij.java.psi").projectDir = file("java/java-psi-api")
+project(":intellij.java.psi.impl").projectDir = file("java/java-psi-impl")
