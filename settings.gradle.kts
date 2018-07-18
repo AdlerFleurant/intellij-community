@@ -36,7 +36,8 @@ include(
   "uast:uast-common",
   "uast:uast-java",
   "intellij.java.analysis",
-  "intellij.java.indexing"
+  "intellij.java.indexing",
+  "intellij.platform.tasks"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -70,3 +71,4 @@ project(":intellij.java.psi").projectDir = file("java/java-psi-api")
 project(":intellij.java.psi.impl").projectDir = file("java/java-psi-impl")
 project(":intellij.java.analysis").projectDir = file("java/java-analysis-api")
 project(":intellij.java.indexing").projectDir = file("java/java-indexing-api")
+project(":intellij.platform.tasks").projectDir = file("platform/tasks-platform-api")
