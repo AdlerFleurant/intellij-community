@@ -44,7 +44,8 @@ include(
   "intellij.platform.builtInServer",
   "intellij.idea.community.resources",
   "intellij.xml.analysis",
-  "intellij.xml.structureView"
+  "intellij.xml.structureView",
+  "intellij.xml"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -86,3 +87,4 @@ project(":intellij.platform.builtInServer").projectDir = file("platform/built-in
 project(":intellij.idea.community.resources").projectDir = file("community-resources")
 project(":intellij.xml.analysis").projectDir = file("xml/xml-analysis-api")
 project(":intellij.xml.structureView").projectDir = file("xml/xml-structure-view-api")
+project(":intellij.xml").projectDir = file("xml/openapi")
