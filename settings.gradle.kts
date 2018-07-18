@@ -45,7 +45,8 @@ include(
   "intellij.idea.community.resources",
   "intellij.xml.analysis",
   "intellij.xml.structureView",
-  "intellij.xml"
+  "intellij.xml",
+  "intellij.tools.testsBootstrap"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -88,3 +89,4 @@ project(":intellij.idea.community.resources").projectDir = file("community-resou
 project(":intellij.xml.analysis").projectDir = file("xml/xml-analysis-api")
 project(":intellij.xml.structureView").projectDir = file("xml/xml-structure-view-api")
 project(":intellij.xml").projectDir = file("xml/openapi")
+project(":intellij.tools.testsBootstrap").projectDir = file("platform/testFramework/bootstrap")
