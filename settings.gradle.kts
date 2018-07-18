@@ -38,7 +38,8 @@ include(
   "intellij.java.indexing",
   "intellij.platform.tasks",
   "intellij.platform.debugger",
-  "intellij.xml.psi"
+  "intellij.xml.psi",
+  "intellij.platform.colorSchemes"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -74,3 +75,4 @@ project(":intellij.java.indexing").projectDir = file("java/java-indexing-api")
 project(":intellij.platform.tasks").projectDir = file("platform/tasks-platform-api")
 project(":intellij.platform.debugger").projectDir = file("platform/xdebugger-api")
 project(":intellij.xml.psi").projectDir = file("xml/xml-psi-api")
+project(":intellij.platform.colorSchemes").projectDir = file("colorSchemes")
