@@ -40,7 +40,8 @@ include(
   "intellij.platform.debugger",
   "intellij.xml.psi",
   "intellij.platform.colorSchemes",
-  "intellij.platform.jps.model.impl"
+  "intellij.platform.jps.model.impl",
+  "intellij.platform.builtInServer"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -78,3 +79,4 @@ project(":intellij.platform.debugger").projectDir = file("platform/xdebugger-api
 project(":intellij.xml.psi").projectDir = file("xml/xml-psi-api")
 project(":intellij.platform.colorSchemes").projectDir = file("colorSchemes")
 project(":intellij.platform.jps.model.impl").projectDir = file("jps/model-impl")
+project(":intellij.platform.builtInServer").projectDir = file("platform/built-in-server-api")
