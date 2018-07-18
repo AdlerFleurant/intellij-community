@@ -39,7 +39,8 @@ include(
   "intellij.platform.tasks",
   "intellij.platform.debugger",
   "intellij.xml.psi",
-  "intellij.platform.colorSchemes"
+  "intellij.platform.colorSchemes",
+  "intellij.platform.jps.model.impl"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -76,3 +77,4 @@ project(":intellij.platform.tasks").projectDir = file("platform/tasks-platform-a
 project(":intellij.platform.debugger").projectDir = file("platform/xdebugger-api")
 project(":intellij.xml.psi").projectDir = file("xml/xml-psi-api")
 project(":intellij.platform.colorSchemes").projectDir = file("colorSchemes")
+project(":intellij.platform.jps.model.impl").projectDir = file("jps/model-impl")
