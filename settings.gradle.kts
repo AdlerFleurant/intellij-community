@@ -42,7 +42,8 @@ include(
   "intellij.platform.colorSchemes",
   "intellij.platform.jps.model.impl",
   "intellij.platform.builtInServer",
-  "intellij.idea.community.resources"
+  "intellij.idea.community.resources",
+  "intellij.xml.analysis"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -82,3 +83,4 @@ project(":intellij.platform.colorSchemes").projectDir = file("colorSchemes")
 project(":intellij.platform.jps.model.impl").projectDir = file("jps/model-impl")
 project(":intellij.platform.builtInServer").projectDir = file("platform/built-in-server-api")
 project(":intellij.idea.community.resources").projectDir = file("community-resources")
+project(":intellij.xml.analysis").projectDir = file("xml/xml-analysis-api")
