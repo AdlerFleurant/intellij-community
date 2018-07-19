@@ -47,7 +47,8 @@ include(
   "intellij.xml.structureView",
   "intellij.xml",
   "intellij.tools.testsBootstrap",
-  "intellij.platform.testFramework.core"
+  "intellij.platform.testFramework.core",
+  "intellij.platform.projectModel.impl"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -92,3 +93,4 @@ project(":intellij.xml.structureView").projectDir = file("xml/xml-structure-view
 project(":intellij.xml").projectDir = file("xml/openapi")
 project(":intellij.tools.testsBootstrap").projectDir = file("platform/testFramework/bootstrap")
 project(":intellij.platform.testFramework.core").projectDir = file("platform/testFramework/core")
+project(":intellij.platform.projectModel.impl").projectDir = file("platform/projectModel-impl")
