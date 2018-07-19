@@ -48,7 +48,8 @@ include(
   "intellij.xml",
   "intellij.tools.testsBootstrap",
   "intellij.platform.testFramework.core",
-  "intellij.platform.projectModel.impl"
+  "intellij.platform.projectModel.impl",
+  "intellij.platform.indexing.impl"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -94,3 +95,4 @@ project(":intellij.xml").projectDir = file("xml/openapi")
 project(":intellij.tools.testsBootstrap").projectDir = file("platform/testFramework/bootstrap")
 project(":intellij.platform.testFramework.core").projectDir = file("platform/testFramework/core")
 project(":intellij.platform.projectModel.impl").projectDir = file("platform/projectModel-impl")
+project(":intellij.platform.indexing.impl").projectDir = file("platform/indexing-impl")
