@@ -50,7 +50,8 @@ include(
   "intellij.platform.testFramework.core",
   "intellij.platform.projectModel.impl",
   "intellij.platform.indexing.impl",
-  "intellij.platform.editor.ex"
+  "intellij.platform.editor.ex",
+  "intellij.platform.vcs.log"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -98,3 +99,4 @@ project(":intellij.platform.testFramework.core").projectDir = file("platform/tes
 project(":intellij.platform.projectModel.impl").projectDir = file("platform/projectModel-impl")
 project(":intellij.platform.indexing.impl").projectDir = file("platform/indexing-impl")
 project(":intellij.platform.editor.ex").projectDir = file("platform/editor-ui-ex")
+project(":intellij.platform.vcs.log").projectDir = file("platform/vcs-log/api")
