@@ -58,7 +58,8 @@ include(
   "intellij.json",
   "intellij.xml.dom",
   "intellij.java",
-  "intellij.java.compiler"
+  "intellij.java.compiler",
+  "intellij.platform.externalSystem"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -114,3 +115,4 @@ project(":intellij.json").projectDir = file("json")
 project(":intellij.xml.dom").projectDir = file("xml/dom-openapi")
 project(":intellij.java").projectDir = file("java/openapi")
 project(":intellij.java.compiler").projectDir = file("java/compiler/openapi")
+project(":intellij.platform.externalSystem").projectDir = file("platform/external-system-api")
