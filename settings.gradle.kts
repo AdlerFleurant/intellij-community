@@ -55,7 +55,8 @@ include(
   "intellij.platform.structureView.impl",
   "intellij.platform.resources",
   "intellij.platform.lvcs.impl",
-  "intellij.json"
+  "intellij.json",
+  "intellij.xml.dom"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -108,3 +109,4 @@ project(":intellij.platform.structureView.impl").projectDir = file("platform/str
 project(":intellij.platform.resources").projectDir = file("platform/platform-resources")
 project(":intellij.platform.lvcs.impl").projectDir = file("platform/lvcs-impl")
 project(":intellij.json").projectDir = file("json")
+project(":intellij.xml.dom").projectDir = file("xml/dom-openapi")
