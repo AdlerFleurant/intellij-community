@@ -18,10 +18,10 @@ package com.intellij.ide.ui.laf.intellij;
 import com.intellij.ide.ui.laf.darcula.DarculaUIUtil;
 import com.intellij.ide.ui.laf.darcula.ui.DarculaButtonUI;
 import com.intellij.util.ui.*;
-import sun.swing.SwingUtilities2;
 
 import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.basic.BasicGraphicsUtils;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -118,7 +118,7 @@ public class WinIntelliJButtonUI extends DarculaButtonUI {
     Graphics2D g2 = (Graphics2D)g.create();
     try {
       g2.setColor(UIManager.getColor("Button.disabledText"));
-      SwingUtilities2.drawStringUnderlineCharAt(c, g2, text, -1,
+      BasicGraphicsUtils.drawStringUnderlineCharAt(c, g2, text, -1,
                                                 textRect.x + getTextShiftOffset(),
                                                 textRect.y + metrics.getAscent() + getTextShiftOffset());
     } finally {

@@ -15,10 +15,9 @@
  */
 package com.intellij.ui.plaf.gtk;
 
-import sun.swing.plaf.synth.SynthIcon;
-
 import javax.swing.*;
 import javax.swing.plaf.synth.SynthContext;
+import javax.swing.plaf.synth.SynthIcon;
 import javax.swing.plaf.synth.SynthUI;
 import java.awt.*;
 

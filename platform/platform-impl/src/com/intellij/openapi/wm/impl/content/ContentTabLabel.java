@@ -17,10 +17,10 @@ import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.TimedDeadzone;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import sun.swing.SwingUtilities2;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicGraphicsUtils;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
@@ -147,14 +147,14 @@ class ContentTabLabel extends BaseLabel {
 
   private void updateText() {
     FontMetrics fm = getFontMetrics(getFont());
-    int textWidth = SwingUtilities2.stringWidth(this, fm, myText);
-    int prefWidth = myIconWithInsetsWidth + textWidth;
+    float textWidth = BasicGraphicsUtils.getStringWidth(this, fm, myText);
+    float prefWidth = myIconWithInsetsWidth + textWidth;
 
     int maxWidth = getMaximumSize().width;
 
     if(prefWidth > maxWidth) {
       int offset = maxWidth - myIconWithInsetsWidth;
-      String s = SwingUtilities2.clipString(this, fm, myText, offset);
+      String s = BasicGraphicsUtils.getClippedString(this, fm, myText, offset);
       super.setText(s);
       return;
     }

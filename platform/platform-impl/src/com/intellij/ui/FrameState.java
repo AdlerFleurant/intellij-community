@@ -15,7 +15,6 @@
  */
 package com.intellij.ui;
 
-import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.wm.WindowManager;
 import com.intellij.openapi.wm.ex.IdeFrameEx;
 import org.jetbrains.annotations.NotNull;
@@ -23,8 +22,6 @@ import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.awt.peer.ComponentPeer;
-import java.awt.peer.FramePeer;
 
 /**
  * @author Sergey Malenkov
@@ -58,13 +55,6 @@ public class FrameState {
     int state = Frame.NORMAL;
     if (component instanceof Frame) {
       state = ((Frame)component).getExtendedState();
-      if (SystemInfo.isMacOSLion) {
-        // workaround: frame.state is not updated by jdk so get it directly from peer
-        ComponentPeer peer = component.getPeer();
-        if (peer instanceof FramePeer) {
-          state = ((FramePeer)peer).getState();
-        }
-      }
     }
     return state;
   }

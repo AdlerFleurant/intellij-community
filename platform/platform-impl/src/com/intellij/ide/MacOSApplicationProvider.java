@@ -1,7 +1,6 @@
 // Copyright 2000-2018 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
 package com.intellij.ide;
 
-import com.apple.eawt.Application;
 import com.intellij.ide.actions.AboutAction;
 import com.intellij.ide.actions.OpenFileAction;
 import com.intellij.ide.actions.ShowSettingsAction;
@@ -97,17 +96,17 @@ public class MacOSApplicationProvider {
 
   private static class Worker {
     public static void initMacApplication() {
-      Application application = Application.getApplication();
-      application.setAboutHandler(event -> AboutAction.perform(getProject(false)));
-      application.setPreferencesHandler(event -> {
+      Desktop desktop = Desktop.getDesktop();
+      desktop.setAboutHandler(event-> AboutAction.perform(getProject(false)));
+      desktop.setPreferencesHandler(event -> {
         Project project = getProject(true);
         submit("Preferences", () -> ShowSettingsAction.perform(project));
       });
-      application.setQuitHandler((event, response) -> {
+      desktop.setQuitHandler((event, response) -> {
         submit("Quit", () -> ApplicationManager.getApplication().exit());
         response.cancelQuit();
       });
-      application.setOpenFileHandler(event -> {
+      desktop.setOpenFileHandler(event -> {
         Project project = getProject(false);
         List<File> list = event.getFiles();
         if (list.isEmpty()) return;

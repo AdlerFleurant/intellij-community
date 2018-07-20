@@ -25,7 +25,6 @@ import com.intellij.openapi.wm.IdeFocusManager;
 import com.intellij.util.ReflectionUtil;
 import com.intellij.util.ui.UIUtil;
 import com.intellij.util.ui.accessibility.ScreenReader;
-import com.sun.awt.AWTUtilities;
 
 import javax.accessibility.AccessibleContext;
 import javax.swing.*;
@@ -214,7 +213,7 @@ public interface PopupComponent {
     private static void fixFlickering(Window wnd, boolean opaque) {
       try {
         if (UIUtil.isUnderDarcula() && SystemInfo.isMac && Registry.is("darcula.fix.native.flickering") && wnd != null) {
-          AWTUtilities.setWindowOpaque(wnd, opaque);
+          wnd.setOpacity(0);
         }
       } catch (Exception ignore) {}
     }

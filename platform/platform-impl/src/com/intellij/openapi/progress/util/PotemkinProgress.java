@@ -23,7 +23,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.util.concurrency.Semaphore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import sun.awt.SunToolkit;
 
 import javax.swing.*;
 import java.awt.*;
@@ -77,7 +76,7 @@ public class PotemkinProgress extends ProgressWindow implements PingProgress {
   }
 
   private void dispatchAwtEventsWithoutModelAccess(int timeoutMs) {
-    SunToolkit.flushPendingEvents();
+    //SunToolkit.flushPendingEvents(); todo: af wasn't commented
     try {
       while (true) {
         InputEvent event = myEventQueue.poll(timeoutMs, TimeUnit.MILLISECONDS);

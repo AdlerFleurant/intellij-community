@@ -65,11 +65,11 @@ import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.io.JsonReaderEx;
-import sun.swing.SwingUtilities2;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.event.DocumentEvent;
+import javax.swing.plaf.basic.BasicGraphicsUtils;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.View;
 import javax.swing.text.html.HTMLEditorKit;
@@ -382,9 +382,9 @@ public class PluginManagerConfigurableNew
         };
 
         mySearchPopup = JBPopupFactory.getInstance().createListPopupBuilder(mySearchPopupList = new JBList<>(mySearchPopupModel))
-                                      .setMovable(false).setResizable(false).setRequestFocus(false)
-                                      .setItemChosenCallback(callback)
-                                      .setRenderer(renderer).createPopup();
+          .setMovable(false).setResizable(false).setRequestFocus(false)
+          .setItemChosenCallback(callback)
+          .setRenderer(renderer).createPopup();
 
         mySearchPopup.addListener(new JBPopupAdapter() {
           @Override
@@ -636,7 +636,7 @@ public class PluginManagerConfigurableNew
       new PluginsGroupComponentWithProgress(new PluginsGridLayout(), EventHandler.EMPTY, myNameListener, mySearchListener,
                                             descriptor -> new GridCellPluginComponent(myPluginsModel, descriptor, myTagBuilder));
     panel.getEmptyText().setText("Trending plugins are not loaded.")
-         .appendSecondaryText("Check the interner connection.", StatusText.DEFAULT_ATTRIBUTES, null);
+      .appendSecondaryText("Check the interner connection.", StatusText.DEFAULT_ATTRIBUTES, null);
 
     ApplicationManager.getApplication().executeOnPooledThread(() -> {
       List<PluginsGroup> groups = new ArrayList<>();
@@ -1368,9 +1368,9 @@ public class PluginManagerConfigurableNew
       FontMetrics fm = getFontMetrics(getFont());
 
       for (int i = 0; i < size; i++) {
-        int tabWidth = offset + SwingUtilities2.stringWidth(null, fm, myTabs.get(i).compute()) + offset;
+        float tabWidth = offset + BasicGraphicsUtils.getStringWidth(null, fm, myTabs.get(i).compute()) + offset;
         mySizeInfo.tabTitleX[i] = x + offset;
-        mySizeInfo.tabs[i] = new Rectangle(x, 0, tabWidth, -1);
+        mySizeInfo.tabs[i] = new Rectangle(x, 0, (int)tabWidth, -1);
         x += tabWidth;
       }
 

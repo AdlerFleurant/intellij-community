@@ -27,12 +27,9 @@ import com.sun.jna.platform.win32.*;
 import com.sun.jna.ptr.PointerByReference;
 import com.sun.jna.win32.StdCallLibrary;
 import com.sun.jna.win32.W32APIOptions;
-import org.jetbrains.annotations.NotNull;
-import sun.awt.AWTAccessor;
 
+import javax.swing.*;
 import java.awt.*;
-import java.awt.peer.ComponentPeer;
-import java.lang.reflect.Method;
 
 /**
  * @author Alexander Lobas
@@ -118,9 +115,9 @@ class Win7TaskBar {
       return;
     }
 
-    WinDef.HWND handle = getHandle(frame);
-    mySetProgressState.invokeInt(new Object[]{myInterfacePointer, handle, isOk ? TBPF_NORMAL : TBPF_ERROR});
-    mySetProgressValue.invokeInt(new Object[]{myInterfacePointer, handle, new WinDef.ULONGLONG((long)(value * 100)), TOTAL_PROGRESS});
+    Window window = SwingUtilities.getWindowAncestor(frame.getComponent());
+    Taskbar.getTaskbar().setWindowProgressValue(window, (int)(value * 100));
+    Taskbar.getTaskbar().setWindowProgressState(window, isOk ? Taskbar.State.NORMAL : Taskbar.State.ERROR);
   }
 
   private static boolean isEnabled() {
@@ -132,43 +129,15 @@ class Win7TaskBar {
       return;
     }
 
-    mySetProgressState.invokeInt(new Object[]{myInterfacePointer, getHandle(frame), TBPF_NOPROGRESS});
+    Taskbar.getTaskbar().setWindowProgressState(SwingUtilities.getWindowAncestor(frame.getComponent()), Taskbar.State.INDETERMINATE);
   }
 
-  static void setOverlayIcon(IdeFrame frame, Object icon, boolean dispose) {
+  static void setOverlayIcon(IdeFrame frame, Image icon, boolean dispose) {
     if (!isEnabled()) {
       return;
     }
 
-    if (icon == null) {
-      icon = Pointer.NULL;
-    }
-    mySetOverlayIcon.invokeInt(new Object[]{myInterfacePointer, getHandle(frame), icon, Pointer.NULL});
-    if (dispose) {
-      User32.INSTANCE.DestroyIcon((WinDef.HICON)icon);
-    }
-  }
-
-  static Object createIcon(byte[] ico) {
-    if (!isEnabled()) {
-      return new Object();
-    }
-
-    DisposableMemory memory = new DisposableMemory(ico.length);
-
-    try {
-      memory.write(0, ico, 0, ico.length);
-
-      int nSize = 100;
-      int offset = User32Ex.INSTANCE.LookupIconIdFromDirectoryEx(memory, true, nSize, nSize, 0);
-      if (offset != 0) {
-        return User32Ex.INSTANCE.CreateIconFromResourceEx(memory.share(offset), DWORD_ZERO, true, ICO_VERSION, nSize, nSize, 0);
-      }
-      return null;
-    }
-    finally {
-      memory.dispose();
-    }
+    Taskbar.getTaskbar().setWindowIconBadge(SwingUtilities.getWindowAncestor(frame.getComponent()), icon);
   }
 
   static void attention(IdeFrame frame, boolean critical) {
@@ -176,19 +145,6 @@ class Win7TaskBar {
       return;
     }
 
-    User32Ex.INSTANCE.FlashWindow(getHandle(frame), true);
-  }
-
-  private static WinDef.HWND getHandle(@NotNull IdeFrame frame) {
-    Component component = (Component)frame;
-    try {
-      ComponentPeer peer = AWTAccessor.getComponentAccessor().getPeer(component);
-      Method getHWnd = peer.getClass().getMethod("getHWnd");
-      return new WinDef.HWND(new Pointer((Long)getHWnd.invoke(peer)));
-    }
-    catch (Throwable e) {
-      LOG.error(e);
-      return null;
-    }
+    Taskbar.getTaskbar().requestUserAttention(true, critical);
   }
 }

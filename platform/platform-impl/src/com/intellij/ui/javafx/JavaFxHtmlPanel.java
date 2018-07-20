@@ -6,7 +6,6 @@ import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.ui.JBColor;
 import com.intellij.util.ui.JBUI;
-import com.sun.javafx.application.PlatformImpl;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
@@ -33,7 +32,7 @@ public class JavaFxHtmlPanel implements Disposable {
     myPanelWrapper = new JPanel(new BorderLayout());
     myPanelWrapper.setBackground(JBColor.background());
 
-    ApplicationManager.getApplication().invokeLater(() -> runFX(() -> PlatformImpl.startup(() -> {
+    ApplicationManager.getApplication().invokeLater(() -> runFX(() -> Platform.startup(() -> {
       myWebView = new WebView();
       myWebView.setContextMenuEnabled(false);
       myWebView.setZoom(JBUI.scale(1.f));

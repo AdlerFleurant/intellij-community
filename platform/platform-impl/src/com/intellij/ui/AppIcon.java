@@ -34,12 +34,14 @@ import org.apache.commons.imaging.common.BinaryOutputStream;
 import org.jetbrains.annotations.NotNull;
 
 import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -367,16 +369,16 @@ public abstract class AppIcon {
       }
     }
 
-    private static Method getAppMethod(final String name, Class... args) throws NoSuchMethodException, ClassNotFoundException {
+    private static Method getAppMethod(final String name, Class... args) throws NoSuchMethodException {
       return getAppClass().getMethod(name, args);
     }
 
-    private static Object getApp() throws NoSuchMethodException, ClassNotFoundException, InvocationTargetException, IllegalAccessException {
+    private static Object getApp() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
       return getAppClass().getMethod("getApplication").invoke(null);
     }
 
-    private static Class<?> getAppClass() throws ClassNotFoundException {
-      return Class.forName("com.apple.eawt.Application");
+    private static Class<?> getAppClass() {
+      return Desktop.class;
     }
   }
 
@@ -533,7 +535,7 @@ public abstract class AppIcon {
         return;
       }
 
-      Object icon = null;
+      Image icon = null;
 
       if (text != null) {
         try {
@@ -564,7 +566,7 @@ public abstract class AppIcon {
           g.drawString(text, size / 2 - textWidth / 2, size / 2 - fontMetrics.getHeight() / 2 + fontMetrics.getAscent());
 
           byte[] bytes = writeTransparentIco(image);
-          icon = Win7TaskBar.createIcon(bytes);
+          icon =ImageIO.read(new ByteArrayInputStream(bytes));
         }
         catch (Throwable e) {
           LOG.error(e);
@@ -579,7 +581,7 @@ public abstract class AppIcon {
       }
     }
 
-    private Object myOkIcon;
+    private Image myOkIcon;
 
     @Override
     public void _setOkBadge(IdeFrame frame, boolean visible) {
@@ -587,7 +589,7 @@ public abstract class AppIcon {
         return;
       }
 
-      Object icon = null;
+      Image icon = null;
 
       if (visible) {
         synchronized (Win7AppIcon.class) {
@@ -595,7 +597,7 @@ public abstract class AppIcon {
             try {
               BufferedImage image = ImageIO.read(getClass().getResource("/mac/appIconOk512.png"));
               byte[] bytes = writeTransparentIco(image);
-              myOkIcon = Win7TaskBar.createIcon(bytes);
+              myOkIcon = ImageIO.read(new ByteArrayInputStream(bytes));
             }
             catch (Throwable e) {
               LOG.error(e);

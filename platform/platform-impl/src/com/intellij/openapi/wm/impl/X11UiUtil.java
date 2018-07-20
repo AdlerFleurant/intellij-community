@@ -17,7 +17,6 @@ import sun.misc.Unsafe;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.peer.ComponentPeer;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.regex.Matcher;
@@ -324,39 +323,31 @@ public class X11UiUtil {
 
   private static boolean hasWindowProperty(JFrame frame, long name, long expected) {
     if (X11 == null) return false;
-    try {
-      @SuppressWarnings("deprecation") ComponentPeer peer = frame.getPeer();
-      if (peer != null) {
-        long window = (Long)X11.getWindow.invoke(peer);
-        long[] values = X11.getLongArrayProperty(window, name, XA_ATOM);
-        if (values != null) {
-          for (long value : values) {
-            if (value == expected) return true;
-          }
-        }
-      }
-      return false;
-    }
-    catch (Throwable t) {
-      LOG.info("cannot check window property", t);
-      return false;
-    }
+    return true;
+
+    //todo: af fix this
+    //try {
+    //  @SuppressWarnings("deprecation") ComponentPeer peer = frame.getPeer();
+    //  if (peer != null) {
+    //    long window = (Long)X11.getWindow.invoke(peer);
+    //    long[] values = X11.getLongArrayProperty(window, name, XA_ATOM);
+    //    if (values != null) {
+    //      for (long value : values) {
+    //        if (value == expected) return true;
+    //      }
+    //    }
+    //  }
+    //  return false;
+    //}
+    //catch (Throwable t) {
+    //  LOG.info("cannot check window property", t);
+    //  return false;
+    //}
   }
 
   public static void toggleFullScreenMode(JFrame frame) {
-    if (X11 == null) return;
-
-    try {
-      @SuppressWarnings("deprecation") ComponentPeer peer = frame.getPeer();
-      if (peer == null) throw new IllegalStateException(frame + " has no peer");
-      long window = (Long)X11.getWindow.invoke(peer);
-      long screen = (Long)X11.getScreenNumber.invoke(peer);
-      long rootWindow = X11.getRootWindow(screen);
-      X11.sendClientMessage(rootWindow, window, X11.NET_WM_STATE, NET_WM_STATE_TOGGLE, X11.NET_WM_STATE_FULLSCREEN);
-    }
-    catch (Throwable t) {
-      LOG.info("cannot toggle mode", t);
-    }
+      frame.setUndecorated(true);
+      frame.setExtendedState(Frame.MAXIMIZED_BOTH);
   }
 
   // reflection utilities

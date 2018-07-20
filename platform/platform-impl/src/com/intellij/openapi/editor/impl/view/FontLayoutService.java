@@ -20,7 +20,6 @@ import com.intellij.util.ReflectionUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.TestOnly;
-import sun.font.FontDesignMetrics;
 
 import java.awt.*;
 import java.awt.font.FontRenderContext;
@@ -64,13 +63,7 @@ public abstract class FontLayoutService {
     // this flag is supported by JetBrains Runtime
     private static final int LAYOUT_NO_PAIRED_CHARS_AT_SCRIPT_SPLIT = 8;
 
-    private final Method myHandleCharWidthMethod;
-
     private DefaultFontLayoutService() {
-      myHandleCharWidthMethod = ReflectionUtil.getDeclaredMethod(FontDesignMetrics.class, "handleCharWidth", int.class);
-      if (myHandleCharWidthMethod == null) {
-        LOG.warn("Couldn't access FontDesignMetrics.handleCharWidth method");
-      }
     }
 
     @NotNull
@@ -93,14 +86,6 @@ public abstract class FontLayoutService {
 
     @Override
     public float charWidth2D(@NotNull FontMetrics fontMetrics, int codePoint) {
-      if (myHandleCharWidthMethod != null && fontMetrics instanceof FontDesignMetrics) {
-        try {
-          return (float)myHandleCharWidthMethod.invoke(fontMetrics, codePoint);
-        }
-        catch (Exception e) {
-          LOG.debug(e);
-        }
-      }
       return charWidth(fontMetrics, codePoint);
     }
 

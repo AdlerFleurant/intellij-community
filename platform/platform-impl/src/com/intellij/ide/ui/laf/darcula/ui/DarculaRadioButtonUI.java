@@ -5,10 +5,10 @@ import com.intellij.util.ui.EmptyIcon;
 import com.intellij.util.ui.JBInsets;
 import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.LafIconLookup;
-import sun.swing.SwingUtilities2;
 
 import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.basic.BasicGraphicsUtils;
 import javax.swing.plaf.basic.BasicHTML;
 import javax.swing.plaf.metal.MetalRadioButtonUI;
 import javax.swing.text.View;
@@ -46,7 +46,7 @@ public class DarculaRadioButtonUI extends MetalRadioButtonUI {
 
     Font f = c.getFont();
     g.setFont(f);
-    FontMetrics fm = SwingUtilities2.getFontMetrics(c, g, f);
+    FontMetrics fm = c.getFontMetrics(f);
 
     String text = SwingUtilities.layoutCompoundLabel(
       c, fm, b.getText(), getDefaultIcon(),
@@ -84,7 +84,7 @@ public class DarculaRadioButtonUI extends MetalRadioButtonUI {
       } else {
         int mnemonicIndex = b.getDisplayedMnemonicIndex();
         g.setColor(b.isEnabled() ? b.getForeground() : getDisabledTextColor());
-        SwingUtilities2.drawStringUnderlineCharAt(b, g, text, mnemonicIndex, textRect.x, textRect.y + fm.getAscent());
+        BasicGraphicsUtils.drawStringUnderlineCharAt(b, g, text, mnemonicIndex, textRect.x, textRect.y + fm.getAscent());
       }
     }
 

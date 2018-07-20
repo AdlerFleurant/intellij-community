@@ -25,7 +25,6 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.JBColor;
 import com.intellij.ui.components.JBOptionButton;
 import com.intellij.util.ui.*;
-import sun.swing.SwingUtilities2;
 
 import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
@@ -163,11 +162,11 @@ public class DarculaButtonUI extends BasicButtonUI {
     ButtonModel model = button.getModel();
     g.setColor(getButtonTextColor(button));
 
-    FontMetrics metrics = SwingUtilities2.getFontMetrics(c, g);
+    FontMetrics metrics = c.getFontMetrics(g.getFont());
     int mnemonicIndex = DarculaLaf.isAltPressed() ? button.getDisplayedMnemonicIndex() : -1;
     if (model.isEnabled()) {
 
-      SwingUtilities2.drawStringUnderlineCharAt(c, g, text, mnemonicIndex,
+      BasicGraphicsUtils.drawStringUnderlineCharAt(c, (Graphics2D)g, text, mnemonicIndex,
                                                 textRect.x + getTextShiftOffset(),
                                                 textRect.y + metrics.getAscent() + getTextShiftOffset());
     }
@@ -187,7 +186,7 @@ public class DarculaButtonUI extends BasicButtonUI {
 
   protected void paintDisabledText(Graphics g, String text, JComponent c, Rectangle textRect, FontMetrics metrics) {
     g.setColor(UIManager.getColor("Button.disabledText"));
-    SwingUtilities2.drawStringUnderlineCharAt(c, g, text, -1,
+    BasicGraphicsUtils.drawStringUnderlineCharAt(c, (Graphics2D)g, text, -1,
                                               textRect.x + getTextShiftOffset(),
                                               textRect.y + metrics.getAscent() + getTextShiftOffset());
   }
@@ -195,7 +194,7 @@ public class DarculaButtonUI extends BasicButtonUI {
   protected void paintContents(Graphics g, AbstractButton b) {
     if (b instanceof JBOptionButton) return;
 
-    FontMetrics fm = SwingUtilities2.getFontMetrics(b, g);
+    FontMetrics fm = b.getFontMetrics(g.getFont());
     boolean isDotButton = isSquare(b) && b.getIcon() == AllIcons.General.Ellipsis;
     String text = isDotButton ? "..." : b.getText();
     Icon icon = isDotButton ? null : b.getIcon();

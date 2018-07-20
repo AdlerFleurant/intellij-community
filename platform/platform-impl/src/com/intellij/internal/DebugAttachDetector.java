@@ -10,7 +10,7 @@ import com.intellij.openapi.application.ex.ApplicationEx;
 import com.intellij.openapi.application.ex.ApplicationManagerEx;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.Pair;
-import sun.misc.VMSupport;
+import com.intellij.util.net.NetUtils;
 
 import java.lang.management.ManagementFactory;
 import java.util.List;
@@ -69,7 +69,9 @@ public class DebugAttachDetector {
         || app.isUnitTestMode()
         || app.isHeadlessEnvironment()
         || Boolean.getBoolean("disable.attach.detector")
-        || PluginManagerCore.isRunningFromSources()) return;
+        || PluginManagerCore.isRunningFromSources()) {
+      return;
+    }
 
     Pair<String, Integer> attachAddress = getAttachAddress(ManagementFactory.getRuntimeMXBean().getInputArguments());
     if (attachAddress == null) return;
@@ -77,12 +79,10 @@ public class DebugAttachDetector {
     myPort = attachAddress.second;
 
     myTask = JobScheduler.getScheduler().scheduleWithFixedDelay(() -> {
-      String property = VMSupport.getAgentProperties().getProperty("sun.jdwp.listenerAddress");
 
       // leads to garbage in IDEA console, see IDEA-158940
-      // boolean attached = !NetUtils.canConnectToRemoteSocket(myHost, myPort);
+      boolean attached = !NetUtils.canConnectToRemoteSocket(myHost, myPort);
 
-      boolean attached = property != null && property.isEmpty();
       if (!myReady) {
         myAttached = attached;
         myReady = true;

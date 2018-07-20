@@ -7,10 +7,10 @@ import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.LafIconLookup;
 import com.intellij.util.ui.MacUIUtil;
 import com.intellij.util.ui.UIUtil;
-import sun.swing.SwingUtilities2;
 
 import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.basic.BasicGraphicsUtils;
 import java.awt.*;
 import java.awt.geom.Path2D;
 import java.awt.geom.RoundRectangle2D;
@@ -134,6 +134,6 @@ public class MacIntelliJButtonUI extends DarculaButtonUI {
     } else {
       g.setColor(UIManager.getColor("Button.disabledText"));
     }
-    SwingUtilities2.drawStringUnderlineCharAt(c, g, text, -1, x, y);
+    BasicGraphicsUtils.drawStringUnderlineCharAt(c, (Graphics2D)g, text, -1, x, y);
   }
 }

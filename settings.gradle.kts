@@ -60,7 +60,12 @@ include(
   "intellij.java",
   "intellij.java.compiler",
   "intellij.platform.externalSystem",
-  "intellij.platform.analysis.impl"
+  "intellij.platform.analysis.impl",
+  "intellij.platform.ide.impl",
+  "intellij.platform.builtInServer.impl",
+  "intellij.platform.tasks.impl",
+  "intellij.platform.configurationStore.impl",
+  "intellij.platform.credentialStore"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -118,3 +123,8 @@ project(":intellij.java").projectDir = file("java/openapi")
 project(":intellij.java.compiler").projectDir = file("java/compiler/openapi")
 project(":intellij.platform.externalSystem").projectDir = file("platform/external-system-api")
 project(":intellij.platform.analysis.impl").projectDir = file("platform/analysis-impl")
+project(":intellij.platform.ide.impl").projectDir = file("platform/platform-impl")
+project(":intellij.platform.builtInServer.impl").projectDir = file("platform/built-in-server")
+project(":intellij.platform.tasks.impl").projectDir = file("platform/tasks-platform-impl")
+project(":intellij.platform.configurationStore.impl").projectDir = file("platform/configuration-store-impl")
+project(":intellij.platform.credentialStore").projectDir = file("platform/credential-store")

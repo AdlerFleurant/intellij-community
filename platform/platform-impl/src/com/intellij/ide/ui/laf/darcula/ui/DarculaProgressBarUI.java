@@ -7,10 +7,10 @@ import com.intellij.ui.JBColor;
 import com.intellij.util.ui.JBInsets;
 import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.UIUtil;
-import sun.swing.SwingUtilities2;
 
 import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.basic.BasicGraphicsUtils;
 import javax.swing.plaf.basic.BasicProgressBarUI;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -169,21 +169,21 @@ public class DarculaProgressBarUI extends BasicProgressBarUI {
 
     if (progressBar.getOrientation() == SwingConstants.HORIZONTAL) {
       g.setColor(getSelectionBackground());
-      SwingUtilities2.drawString(progressBar, g, progressString, renderLocation.x, renderLocation.y);
+      BasicGraphicsUtils.drawString(progressBar, g, progressString, renderLocation.x, renderLocation.y);
 
       g.setColor(getSelectionForeground());
       g.clipRect(fillStart, y, amountFull, h);
-      SwingUtilities2.drawString(progressBar, g, progressString, renderLocation.x, renderLocation.y);
+      BasicGraphicsUtils.drawString(progressBar, g, progressString, renderLocation.x, renderLocation.y);
     } else { // VERTICAL
       g.setColor(getSelectionBackground());
       AffineTransform rotate = AffineTransform.getRotateInstance(Math.PI/2);
       g.setFont(progressBar.getFont().deriveFont(rotate));
       renderLocation = getStringPlacement(g, progressString, x, y, w, h);
-      SwingUtilities2.drawString(progressBar, g, progressString, renderLocation.x, renderLocation.y);
+      BasicGraphicsUtils.drawString(progressBar, g, progressString, renderLocation.x, renderLocation.y);
 
       g.setColor(getSelectionForeground());
       g.clipRect(x, fillStart, w, amountFull);
-      SwingUtilities2.drawString(progressBar, g, progressString, renderLocation.x, renderLocation.y);
+      BasicGraphicsUtils.drawString(progressBar, g, progressString, renderLocation.x, renderLocation.y);
     }
     g.setClip(oldClip);
   }

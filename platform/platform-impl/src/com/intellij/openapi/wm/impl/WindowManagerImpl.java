@@ -37,8 +37,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
-import java.awt.peer.ComponentPeer;
-import java.awt.peer.FramePeer;
 import java.util.*;
 
 /**
@@ -654,13 +652,6 @@ public final class WindowManagerImpl extends WindowManagerEx implements NamedCom
 
   int updateFrameBounds(@NotNull IdeFrameImpl frame) {
     int extendedState = frame.getExtendedState();
-    if (SystemInfo.isMacOSLion) {
-      ComponentPeer peer = frame.getPeer();
-      if (peer instanceof FramePeer) {
-        // frame.state is not updated by jdk so get it directly from peer
-        extendedState = ((FramePeer)peer).getState();
-      }
-    }
     boolean isMaximized = FrameState.isMaximized(extendedState) ||
                           isFullScreenSupportedInCurrentOS() && frame.isInFullScreen();
 

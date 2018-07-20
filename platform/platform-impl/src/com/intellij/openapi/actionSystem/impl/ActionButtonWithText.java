@@ -14,10 +14,10 @@ import com.intellij.util.ui.JBInsets;
 import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.UIUtil;
 import org.intellij.lang.annotations.MagicConstant;
-import sun.swing.SwingUtilities2;
 
 import javax.swing.*;
 import javax.swing.plaf.ComponentInputMapUIResource;
+import javax.swing.plaf.basic.BasicGraphicsUtils;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
@@ -138,9 +138,9 @@ public class ActionButtonWithText extends ActionButton {
 
     UISettings.setupAntialiasing(g);
     g.setColor(isButtonEnabled() ? getForeground() : getInactiveTextColor());
-    SwingUtilities2.drawStringUnderlineCharAt(this, g, text,
-                                              getMnemonicCharIndex(text),
-                                              textRect.x,
+    BasicGraphicsUtils.drawStringUnderlineCharAt(this, (Graphics2D)g, text,
+                                                 getMnemonicCharIndex(text),
+                                                 textRect.x,
                                               textRect.y + fm.getAscent());
   }
 

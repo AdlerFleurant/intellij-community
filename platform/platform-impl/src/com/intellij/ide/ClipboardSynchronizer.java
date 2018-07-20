@@ -27,25 +27,21 @@ import com.intellij.openapi.util.registry.Registry;
 import com.intellij.ui.mac.foundation.Foundation;
 import com.intellij.ui.mac.foundation.ID;
 import com.intellij.util.Consumer;
-import com.intellij.util.ReflectionUtil;
 import com.intellij.util.concurrency.FutureResult;
 import com.sun.jna.IntegerType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import sun.awt.datatransfer.DataTransferer;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.*;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 /**
  * This class is used to workaround the problem with getting clipboard contents (http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4818143).
@@ -345,7 +341,7 @@ public class ClipboardSynchronizer implements Disposable, ApplicationComponent {
     private static final String DATA_TRANSFER_TIMEOUT_PROPERTY = "sun.awt.datatransfer.timeout";
     private static final String LONG_TIMEOUT = "2000";
     private static final String SHORT_TIMEOUT = "100";
-    private static final FlavorTable FLAVOR_MAP = (FlavorTable)SystemFlavorMap.getDefaultFlavorMap();
+    private static final FlavorMap FLAVOR_MAP = SystemFlavorMap.getDefaultFlavorMap();
 
     private volatile Transferable myCurrentContent = null;
 
@@ -428,35 +424,8 @@ public class ClipboardSynchronizer implements Disposable, ApplicationComponent {
     private static Collection<DataFlavor> checkContentsQuick() {
       final Clipboard clipboard = getClipboard();
       if (clipboard == null) return null;
-      final Class<? extends Clipboard> aClass = clipboard.getClass();
-      if (!"sun.awt.X11.XClipboard".equals(aClass.getName())) return null;
 
-      final Method getClipboardFormats = ReflectionUtil.getDeclaredMethod(aClass, "getClipboardFormats");
-      if (getClipboardFormats == null) return null;
-
-      final String timeout = System.getProperty(DATA_TRANSFER_TIMEOUT_PROPERTY);
-      System.setProperty(DATA_TRANSFER_TIMEOUT_PROPERTY, SHORT_TIMEOUT);
-
-      try {
-        final long[] formats = (long[])getClipboardFormats.invoke(clipboard);
-        if (formats == null || formats.length == 0) {
-          return Collections.emptySet();
-        }
-        @SuppressWarnings({"unchecked"}) final Set<DataFlavor> set = DataTransferer.getInstance().getFlavorsForFormats(formats, FLAVOR_MAP).keySet();
-        return set;
-      }
-      catch (IllegalAccessException | IllegalArgumentException ignore) { }
-      catch (InvocationTargetException e) {
-        final Throwable cause = e.getCause();
-        if (cause instanceof IllegalStateException) {
-          throw (IllegalStateException)cause;
-        }
-      }
-      finally {
-        System.setProperty(DATA_TRANSFER_TIMEOUT_PROPERTY, timeout);
-      }
-
-      return null;
+      return Arrays.stream(clipboard.getAvailableDataFlavors()).collect(Collectors.toSet());
     }
   }
 
