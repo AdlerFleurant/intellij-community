@@ -34,7 +34,8 @@ import com.intellij.util.ui.EmptyIcon;
 import com.intellij.util.ui.JBDimension;
 import com.intellij.util.ui.JBUI;
 import org.jetbrains.annotations.NotNull;
-import sun.swing.table.DefaultTableCellHeaderRenderer;
+//TODO: af replace this
+//import sun.swing.table.DefaultTableCellHeaderRenderer;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableColumnModel;
@@ -183,9 +184,9 @@ public class NullableNotNullDialog extends DialogWrapper {
         columnModel.addColumn(checkColumn);
         checkColumn.setHeaderValue(" Instrument ");
 
-        DefaultTableCellHeaderRenderer renderer = new DefaultTableCellHeaderRenderer();
-        renderer.setToolTipText("Add runtime assertions for notnull-annotated methods and parameters");
-        checkColumn.setHeaderRenderer(renderer);
+        //DefaultTableCellHeaderRenderer renderer = new DefaultTableCellHeaderRenderer();
+        //renderer.setToolTipText("Add runtime assertions for notnull-annotated methods and parameters");
+        //checkColumn.setHeaderRenderer(renderer);
         checkColumn.sizeWidthToFit();
       }
 

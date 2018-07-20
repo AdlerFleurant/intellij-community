@@ -56,7 +56,8 @@ include(
   "intellij.platform.resources",
   "intellij.platform.lvcs.impl",
   "intellij.json",
-  "intellij.xml.dom"
+  "intellij.xml.dom",
+  "intellij.java"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -110,3 +111,4 @@ project(":intellij.platform.resources").projectDir = file("platform/platform-res
 project(":intellij.platform.lvcs.impl").projectDir = file("platform/lvcs-impl")
 project(":intellij.json").projectDir = file("json")
 project(":intellij.xml.dom").projectDir = file("xml/dom-openapi")
+project(":intellij.java").projectDir = file("java/openapi")
