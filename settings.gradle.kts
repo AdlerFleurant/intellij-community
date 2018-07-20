@@ -52,7 +52,10 @@ include(
   "intellij.platform.indexing.impl",
   "intellij.platform.editor.ex",
   "intellij.platform.vcs.log",
-  "intellij.platform.structureView.impl"
+  "intellij.platform.structureView.impl",
+  "intellij.platform.resources",
+  "intellij.platform.lvcs.impl",
+  "intellij.json"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -102,3 +105,6 @@ project(":intellij.platform.indexing.impl").projectDir = file("platform/indexing
 project(":intellij.platform.editor.ex").projectDir = file("platform/editor-ui-ex")
 project(":intellij.platform.vcs.log").projectDir = file("platform/vcs-log/api")
 project(":intellij.platform.structureView.impl").projectDir = file("platform/structure-view-impl")
+project(":intellij.platform.resources").projectDir = file("platform/platform-resources")
+project(":intellij.platform.lvcs.impl").projectDir = file("platform/lvcs-impl")
+project(":intellij.json").projectDir = file("json")
