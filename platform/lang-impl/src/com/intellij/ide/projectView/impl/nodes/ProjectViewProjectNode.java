@@ -7,6 +7,7 @@ import com.intellij.ide.projectView.impl.ModuleGroup;
 import com.intellij.ide.projectView.impl.ProjectRootsUtil;
 import com.intellij.ide.util.treeView.AbstractTreeNode;
 import com.intellij.openapi.module.*;
+import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.impl.LoadedModuleDescriptionImpl;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectFileIndex;

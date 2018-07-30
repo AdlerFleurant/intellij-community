@@ -68,7 +68,8 @@ include(
   "intellij.platform.credentialStore",
   "intellij.platform.main",
   "intellij.platform.usageView",
-  "intellij.platform.diff.impl"
+  "intellij.platform.diff.impl",
+  "intellij.platform.lang.impl"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -134,3 +135,4 @@ project(":intellij.platform.credentialStore").projectDir = file("platform/creden
 project(":intellij.platform.main").projectDir = file("platform/platform-main")
 project(":intellij.platform.usageView").projectDir = file("platform/usageView")
 project(":intellij.platform.diff.impl").projectDir = file("platform/diff-impl")
+project(":intellij.platform.lang.impl").projectDir = file("platform/lang-impl")

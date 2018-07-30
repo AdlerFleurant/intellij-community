@@ -23,6 +23,7 @@ import com.intellij.ide.scratch.ScratchProjectViewPane;
 import com.intellij.ide.scratch.ScratchUtil;
 import com.intellij.ide.util.treeView.AbstractTreeNode;
 import com.intellij.openapi.module.*;
+import com.intellij.openapi.module.Module;
 import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectFileIndex;

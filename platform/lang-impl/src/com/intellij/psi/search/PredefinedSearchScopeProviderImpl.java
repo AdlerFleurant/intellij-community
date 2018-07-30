@@ -16,6 +16,7 @@ import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.extensions.Extensions;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.module.*;
+import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
