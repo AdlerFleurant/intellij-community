@@ -65,7 +65,8 @@ include(
   "intellij.platform.builtInServer.impl",
   "intellij.platform.tasks.impl",
   "intellij.platform.configurationStore.impl",
-  "intellij.platform.credentialStore"
+  "intellij.platform.credentialStore",
+  "intellij.platform.main"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -128,3 +129,4 @@ project(":intellij.platform.builtInServer.impl").projectDir = file("platform/bui
 project(":intellij.platform.tasks.impl").projectDir = file("platform/tasks-platform-impl")
 project(":intellij.platform.configurationStore.impl").projectDir = file("platform/configuration-store-impl")
 project(":intellij.platform.credentialStore").projectDir = file("platform/credential-store")
+project(":intellij.platform.main").projectDir = file("platform/platform-main")
