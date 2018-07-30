@@ -80,7 +80,7 @@ public class GroupNode extends Node implements Navigatable, Comparable<GroupNode
   @NotNull
   List<Node> getSwingChildren() {
     //noinspection unchecked
-    return ObjectUtils.notNull(children, Collections.emptyList());
+    return (List<Node>)ObjectUtils.notNull(children, Collections.emptyList());
   }
 
   @NotNull
