@@ -27,7 +27,7 @@ include(
   "intellij.platform.vcs.core",
   "intellij.platform.vcs",
   "intellij.java.resources.en",
-  "intellij.jps.model.serialization",
+  "intellij.platform.jps.model.serialization",
   "intellij.platform.externalSystem.rt",
   "intellij.java.psi",
   "intellij.java.psi.impl",
@@ -69,7 +69,8 @@ include(
   "intellij.platform.main",
   "intellij.platform.usageView",
   "intellij.platform.diff.impl",
-  "intellij.platform.lang.impl"
+  "intellij.platform.lang.impl",
+  "intellij.platform.vcs.impl"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -96,7 +97,7 @@ project(":intellij.platform.lang").projectDir = file("platform/lang-api")
 project(":intellij.platform.vcs.core").projectDir = file("platform/vcs-api/vcs-api-core")
 project(":intellij.platform.vcs").projectDir = file("platform/vcs-api")
 project(":intellij.java.resources.en").projectDir = file("resources-en")
-project(":intellij.jps.model.serialization").projectDir = file("jps/model-serialization")
+project(":intellij.platform.jps.model.serialization").projectDir = file("jps/model-serialization")
 project(":intellij.platform.externalSystem.rt").projectDir = file("platform/external-system-rt")
 project(":intellij.java.psi").projectDir = file("java/java-psi-api")
 project(":intellij.java.psi.impl").projectDir = file("java/java-psi-impl")
@@ -136,3 +137,4 @@ project(":intellij.platform.main").projectDir = file("platform/platform-main")
 project(":intellij.platform.usageView").projectDir = file("platform/usageView")
 project(":intellij.platform.diff.impl").projectDir = file("platform/diff-impl")
 project(":intellij.platform.lang.impl").projectDir = file("platform/lang-impl")
+project(":intellij.platform.vcs.impl").projectDir = file("platform/vcs-impl")

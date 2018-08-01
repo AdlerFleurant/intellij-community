@@ -1,7 +1,6 @@
 // Copyright 2000-2018 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
 package com.intellij.openapi.vcs.changes.ui;
 
-import com.intellij.ide.TreeExpander;
 import com.intellij.ide.dnd.DnDAware;
 import com.intellij.ide.util.PsiNavigationSupport;
 import com.intellij.ide.util.treeView.TreeState;
@@ -27,6 +26,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -103,8 +103,8 @@ public class ChangesListView extends ChangesTree implements DataProvider, DnDAwa
     if (TreeUtil.collectExpandedPaths(this).size() != 1) return;
 
     //noinspection unchecked
-    Iterator<ChangesBrowserNode> nodes = ContainerUtil.<ChangesBrowserNode>iterate(root.children());
-    ChangesBrowserNode defaultListNode = ContainerUtil.find(nodes, node -> {
+    Iterator<TreeNode> nodes = ContainerUtil.iterate(root.children());
+    ChangesBrowserNode defaultListNode = (ChangesBrowserNode) ContainerUtil.find(nodes, node -> {
       if (node instanceof ChangesBrowserChangeListNode) {
         ChangeList list = ((ChangesBrowserChangeListNode)node).getUserObject();
         return list instanceof LocalChangeList && ((LocalChangeList)list).isDefault();
@@ -186,7 +186,7 @@ public class ChangesListView extends ChangesTree implements DataProvider, DnDAwa
   @NotNull
   public Stream<VirtualFile> getUnversionedFiles() {
     //noinspection unchecked
-    Enumeration<ChangesBrowserNode> nodes = getRoot().children();
+    Enumeration<TreeNode> nodes = getRoot().children();
     ChangesBrowserUnversionedFilesNode node = ContainerUtil.findInstance(ContainerUtil.iterate(nodes),
                                                                          ChangesBrowserUnversionedFilesNode.class);
     if (node == null) return Stream.empty();

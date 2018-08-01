@@ -22,7 +22,7 @@ tasks{
 
 dependencies {
   api(project(":intellij.platform.projectModel"))
-  api(project(":intellij.jps.model.serialization"))
+  api(project(":intellij.platform.jps.model.serialization"))
 
   implementation(project(":intellij.platform.core.impl"))
   implementation(project(":intellij.platform.jps.model"))

@@ -219,7 +219,7 @@ public class TreeModelBuilder {
     if (lists.size() != 1) return false;
     ChangeList single = lists.iterator().next();
     if (!(single instanceof LocalChangeList)) return false;
-    return ((LocalChangeList) single).isBlank();
+    return ((LocalChangeList)single).isBlank();
   }
 
   protected ChangesBrowserNode createChangeNode(Change change, ChangeNodeDecorator decorator) {
@@ -325,7 +325,7 @@ public class TreeModelBuilder {
   public TreeModelBuilder setSwitchedFiles(@NotNull MultiMap<String, VirtualFile> switchedFiles) {
     if (switchedFiles.isEmpty()) return this;
     ChangesBrowserNode subtreeRoot = createTagNode(ChangesBrowserNode.SWITCHED_FILES_TAG);
-    for(String branchName: switchedFiles.keySet()) {
+    for (String branchName : switchedFiles.keySet()) {
       List<VirtualFile> switchedFileList = sorted(switchedFiles.get(branchName), VirtualFileHierarchicalComparator.getInstance());
       if (switchedFileList.size() > 0) {
         ChangesBrowserNode branchNode = ChangesBrowserNode.create(myProject, branchName);
@@ -444,9 +444,9 @@ public class TreeModelBuilder {
       parent.remove(0);
 
       //noinspection unchecked
-      Enumeration<ChangesBrowserNode> children = child.children();
-      for (ChangesBrowserNode childNode : toList(children)) {
-        parent.add(childNode);
+      Enumeration<TreeNode> children = child.children();
+      for (TreeNode childNode : toList(children)) {
+        parent.add((ChangesBrowserNode)childNode);
       }
 
       return parent;
@@ -479,10 +479,11 @@ public class TreeModelBuilder {
   @NotNull
   public static StaticFilePath staticFrom(@NotNull FilePath fp) {
     final String path = fp.getPath();
-    if (fp.isNonLocal() && (! FileUtil.isAbsolute(path) || VcsUtil.isPathRemote(path))) {
+    if (fp.isNonLocal() && (!FileUtil.isAbsolute(path) || VcsUtil.isPathRemote(path))) {
       return new StaticFilePath(fp.isDirectory(), fp.getIOFile().getPath().replace('\\', '/'), fp.getVirtualFile());
     }
-    return new StaticFilePath(fp.isDirectory(), new File(fp.getIOFile().getPath().replace('\\', '/')).getAbsolutePath(), fp.getVirtualFile());
+    return new StaticFilePath(fp.isDirectory(), new File(fp.getIOFile().getPath().replace('\\', '/')).getAbsolutePath(),
+                              fp.getVirtualFile());
   }
 
   @NotNull

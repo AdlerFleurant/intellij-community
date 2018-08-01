@@ -17,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import java.io.File;
 import java.util.Iterator;
@@ -341,8 +342,8 @@ public abstract class VcsTreeModelData {
   private static ChangesBrowserNode<?> findTagNode(@NotNull JTree tree, @NotNull Object tag) {
     ChangesBrowserNode<?> root = (ChangesBrowserNode<?>)tree.getModel().getRoot();
     //noinspection unchecked
-    Iterator<ChangesBrowserNode> iterator = ContainerUtil.<ChangesBrowserNode>iterate(root.children());
-    return ContainerUtil.find(iterator, node -> tag.equals(node.getUserObject()));
+    Iterator<TreeNode> iterator = ContainerUtil.iterate(root.children());
+    return (ChangesBrowserNode<?>)ContainerUtil.find(iterator, node -> tag.equals(((ChangesBrowserNode)node).getUserObject()));
   }
 }
 
