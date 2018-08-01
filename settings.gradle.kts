@@ -72,7 +72,8 @@ include(
   "intellij.platform.lang.impl",
   "intellij.platform.vcs.impl",
   "intellij.platform.lvcs.impl",
-  "intellij.java.compiler.instrumentationUtil"
+  "intellij.java.compiler.instrumentationUtil",
+  "intellij.jsp.base"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -142,3 +143,4 @@ project(":intellij.platform.lang.impl").projectDir = file("platform/lang-impl")
 project(":intellij.platform.vcs.impl").projectDir = file("platform/vcs-impl")
 project(":intellij.platform.lvcs.impl").projectDir = file("platform/lvcs-impl")
 project(":intellij.java.compiler.instrumentationUtil").projectDir = file("java/compiler/instrumentation-util")
+project(":intellij.jsp.base").projectDir = file("java/jsp-base-openapi")
