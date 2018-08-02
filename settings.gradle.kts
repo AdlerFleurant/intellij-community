@@ -82,7 +82,8 @@ include(
   "intellij.xml.psi.impl",
   "intellij.xml.analysis.impl",
   "intellij.xml.structureView.impl",
-  "intellij.xml.impl"
+  "intellij.xml.impl",
+  "intellij.platform.testRunner"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -162,3 +163,4 @@ project(":intellij.xml.psi.impl").projectDir = file("xml/xml-psi-impl")
 project(":intellij.xml.analysis.impl").projectDir = file("xml/xml-analysis-impl")
 project(":intellij.xml.structureView.impl").projectDir = file("xml/xml-structure-view-impl")
 project(":intellij.xml.impl").projectDir = file("xml/impl")
+project(":intellij.platform.testRunner").projectDir = file("platform/testRunner")
