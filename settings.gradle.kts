@@ -79,7 +79,8 @@ include(
   "intellij.relaxng",
   "intellij.spellchecker",
   "intellij.platform.debugger.impl",
-  "intellij.xml.psi.impl"
+  "intellij.xml.psi.impl",
+  "intellij.xml.analysis.impl"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -156,3 +157,4 @@ project(":intellij.relaxng").projectDir = file("xml/relaxng")
 project(":intellij.spellchecker").projectDir = file("spellchecker")
 project(":intellij.platform.debugger.impl").projectDir = file("platform/xdebugger-impl")
 project(":intellij.xml.psi.impl").projectDir = file("xml/xml-psi-impl")
+project(":intellij.xml.analysis.impl").projectDir = file("xml/xml-analysis-impl")
