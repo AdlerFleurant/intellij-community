@@ -88,7 +88,8 @@ include(
   "intellij.platform.remoteServers.agent.rt",
   "intellij.platform.remoteServers",
   "intellij.platform.remoteServers.impl",
-  "intellij.platform.testFramework"
+  "intellij.platform.images",
+  "intellij.platform.duplicates.analysis"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -172,4 +173,5 @@ project(":intellij.platform.testRunner").projectDir = file("platform/testRunner"
 project(":intellij.platform.remoteServers.agent.rt").projectDir = file("platform/remote-servers/agent-rt")
 project(":intellij.platform.remoteServers").projectDir = file("platform/remote-servers/api")
 project(":intellij.platform.remoteServers.impl").projectDir = file("platform/remote-servers/impl")
-project(":intellij.platform.testFramework").projectDir = file("images")
+project(":intellij.platform.images").projectDir = file("images")
+project(":intellij.platform.duplicates.analysis").projectDir = file("platform/duplicates-analysis")
