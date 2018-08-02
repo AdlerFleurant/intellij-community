@@ -51,7 +51,8 @@ import java.io.StringReader;
 import java.util.Arrays;
 import java.util.Map;
 
-import static com.sun.org.apache.xerces.internal.impl.Constants.SECURITY_MANAGER;
+import static org.apache.xerces.impl.Constants.SECURITY_MANAGER_PROPERTY;
+import static org.apache.xerces.impl.Constants.XERCES_PROPERTY_PREFIX;
 
 /**
  * @author Mike
@@ -60,8 +61,8 @@ public class ValidateXmlActionHandler {
   private static final Logger LOG = Logger.getInstance("#com.intellij.xml.actions.validate.ValidateXmlAction");
 
   private static final String SCHEMA_FULL_CHECKING_FEATURE_ID = "http://apache.org/xml/features/validation/schema-full-checking";
-  private static final String GRAMMAR_FEATURE_ID = Constants.XERCES_PROPERTY_PREFIX + Constants.XMLGRAMMAR_POOL_PROPERTY;
-  private static final String ENTITY_MANAGER_PROPERTY_ID = Constants.XERCES_PROPERTY_PREFIX + Constants.ENTITY_MANAGER_PROPERTY;
+  private static final String GRAMMAR_FEATURE_ID = XERCES_PROPERTY_PREFIX + Constants.XMLGRAMMAR_POOL_PROPERTY;
+  private static final String ENTITY_MANAGER_PROPERTY_ID = XERCES_PROPERTY_PREFIX + Constants.ENTITY_MANAGER_PROPERTY;
 
   private static final Key<XMLGrammarPool> GRAMMAR_POOL_KEY = Key.create("GrammarPoolKey");
   private static final Key<Long> GRAMMAR_POOL_TIME_STAMP_KEY = Key.create("GrammarPoolTimeStampKey");
@@ -249,7 +250,7 @@ public class ValidateXmlActionHandler {
 
       String property = System.getProperty(JDK_XML_MAX_OCCUR_LIMIT);
       if (property != null) {
-        SecurityManager securityManager = (SecurityManager)parser.getProperty(SECURITY_MANAGER);
+        SecurityManager securityManager = (SecurityManager)parser.getProperty(XERCES_PROPERTY_PREFIX+SECURITY_MANAGER_PROPERTY);
         securityManager.setMaxOccurNodeLimit(Integer.parseInt(property));
       }
 
