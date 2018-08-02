@@ -13,5 +13,5 @@ public class RegExpSupportIcons {
     return IconLoader.getIcon(path, RegExpSupportIcons.class);
   }
 
-  public static final Icon Regexp_filetype_icon = load("/org/intellij/lang/regexp/regexp-filetype-icon.png"); // 11x16
+  public static final Icon Regexp_filetype_icon = load("/resources/org/intellij/lang/regexp/regexp-filetype-icon.png"); // 11x16
 }

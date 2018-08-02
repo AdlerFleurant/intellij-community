@@ -73,7 +73,12 @@ include(
   "intellij.platform.vcs.impl",
   "intellij.platform.lvcs.impl",
   "intellij.java.compiler.instrumentationUtil",
-  "intellij.jsp.base"
+  "intellij.jsp.base",
+  "intellij.regexp",
+  "intellij.xml.dom.impl",
+  "intellij.relaxng",
+  "intellij.spellchecker",
+  "intellij.platform.debugger.impl"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -144,3 +149,8 @@ project(":intellij.platform.vcs.impl").projectDir = file("platform/vcs-impl")
 project(":intellij.platform.lvcs.impl").projectDir = file("platform/lvcs-impl")
 project(":intellij.java.compiler.instrumentationUtil").projectDir = file("java/compiler/instrumentation-util")
 project(":intellij.jsp.base").projectDir = file("java/jsp-base-openapi")
+project(":intellij.regexp").projectDir = file("RegExpSupport")
+project(":intellij.xml.dom.impl").projectDir = file("xml/dom-impl")
+project(":intellij.relaxng").projectDir = file("xml/relaxng")
+project(":intellij.spellchecker").projectDir = file("spellchecker")
+project(":intellij.platform.debugger.impl").projectDir = file("platform/xdebugger-impl")
