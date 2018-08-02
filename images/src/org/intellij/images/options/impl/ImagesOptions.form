@@ -17,7 +17,7 @@
           <enabled value="true"/>
           <visible value="true"/>
         </properties>
-        <border type="none" title-resource-bundle="org/intellij/images/ImagesBundle" title-key="main.page.border.title"/>
+        <border type="none" title-resource-bundle="ImagesBundle" title-key="main.page.border.title"/>
 <clientProperties>
   <BorderFactoryClass class="java.lang.String" value="com.intellij.ui.IdeBorderFactory$PlainSmallWithIndent"/>
 </clientProperties>

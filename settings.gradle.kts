@@ -1,6 +1,7 @@
 rootProject.name = "intellij.idea.community.main"
 
 enableFeaturePreview("IMPROVED_POM_SUPPORT")
+enableFeaturePreview("STABLE_PUBLISHING")
 
 include(
   "intellij.platform.util.rt",
@@ -86,7 +87,8 @@ include(
   "intellij.platform.testRunner",
   "intellij.platform.remoteServers.agent.rt",
   "intellij.platform.remoteServers",
-  "intellij.platform.remoteServers.impl"
+  "intellij.platform.remoteServers.impl",
+  "intellij.platform.testFramework"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -170,3 +172,4 @@ project(":intellij.platform.testRunner").projectDir = file("platform/testRunner"
 project(":intellij.platform.remoteServers.agent.rt").projectDir = file("platform/remote-servers/agent-rt")
 project(":intellij.platform.remoteServers").projectDir = file("platform/remote-servers/api")
 project(":intellij.platform.remoteServers.impl").projectDir = file("platform/remote-servers/impl")
+project(":intellij.platform.testFramework").projectDir = file("images")
