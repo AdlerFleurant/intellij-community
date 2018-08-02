@@ -84,7 +84,8 @@ include(
   "intellij.xml.structureView.impl",
   "intellij.xml.impl",
   "intellij.platform.testRunner",
-  "intellij.platform.remoteServers.agent.rt"
+  "intellij.platform.remoteServers.agent.rt",
+  "intellij.platform.remoteServers"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -166,3 +167,4 @@ project(":intellij.xml.structureView.impl").projectDir = file("xml/xml-structure
 project(":intellij.xml.impl").projectDir = file("xml/impl")
 project(":intellij.platform.testRunner").projectDir = file("platform/testRunner")
 project(":intellij.platform.remoteServers.agent.rt").projectDir = file("platform/remote-servers/agent-rt")
+project(":intellij.platform.remoteServers").projectDir = file("platform/remote-servers/api")
