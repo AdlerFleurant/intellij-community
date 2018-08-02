@@ -92,7 +92,8 @@ include(
   "intellij.platform.duplicates.analysis",
   "intellij.platform.structuralSearch",
   "intellij.jsp",
-  "intellij.java.resources"
+  "intellij.java.resources",
+  "intellij.jsp.spi"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -181,3 +182,4 @@ project(":intellij.platform.duplicates.analysis").projectDir = file("platform/du
 project(":intellij.platform.structuralSearch").projectDir = file("platform/structuralsearch")
 project(":intellij.jsp").projectDir = file("java/jsp-openapi")
 project(":intellij.java.resources").projectDir = file("resources")
+project(":intellij.jsp.spi").projectDir = file("java/jsp-spi")
