@@ -89,7 +89,8 @@ include(
   "intellij.platform.remoteServers",
   "intellij.platform.remoteServers.impl",
   "intellij.platform.images",
-  "intellij.platform.duplicates.analysis"
+  "intellij.platform.duplicates.analysis",
+  "intellij.platform.structuralSearch"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -175,3 +176,4 @@ project(":intellij.platform.remoteServers").projectDir = file("platform/remote-s
 project(":intellij.platform.remoteServers.impl").projectDir = file("platform/remote-servers/impl")
 project(":intellij.platform.images").projectDir = file("images")
 project(":intellij.platform.duplicates.analysis").projectDir = file("platform/duplicates-analysis")
+project(":intellij.platform.structuralSearch").projectDir = file("platform/structuralsearch")
