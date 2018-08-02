@@ -93,7 +93,8 @@ include(
   "intellij.platform.structuralSearch",
   "intellij.jsp",
   "intellij.java.resources",
-  "intellij.jsp.spi"
+  "intellij.jsp.spi",
+  "intellij.java.execution"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -183,3 +184,4 @@ project(":intellij.platform.structuralSearch").projectDir = file("platform/struc
 project(":intellij.jsp").projectDir = file("java/jsp-openapi")
 project(":intellij.java.resources").projectDir = file("resources")
 project(":intellij.jsp.spi").projectDir = file("java/jsp-spi")
+project(":intellij.java.execution").projectDir = file("java/execution/openapi")
