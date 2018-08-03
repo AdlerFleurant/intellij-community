@@ -12,15 +12,17 @@ import org.junit.Assert;
 import java.util.Arrays;
 import java.util.Set;
 
-@TestOnly
 public class SdkLeakTracker {
   @NotNull
   private final Sdk[] oldSdks;
+
+  @TestOnly
   public SdkLeakTracker() {
     ProjectJdkTable table = ProjectJdkTable.getInstance();
     oldSdks = table == null ? new Sdk[0] : table.getAllJdks();
   }
 
+  @TestOnly
   public void checkForJdkTableLeaks() {
     ProjectJdkTable table = ProjectJdkTable.getInstance();
     if (table != null) {

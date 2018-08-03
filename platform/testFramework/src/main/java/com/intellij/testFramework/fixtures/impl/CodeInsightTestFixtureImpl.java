@@ -135,7 +135,6 @@ import static org.junit.Assert.*;
 /**
  * @author Dmitry Avdeev
  */
-@TestOnly
 public class CodeInsightTestFixtureImpl extends BaseFixture implements CodeInsightTestFixture {
   private static final Function<IntentionAction, String> INTENTION_NAME_FUN = intentionAction -> '"' + intentionAction.getText() + '"';
 
@@ -155,6 +154,7 @@ public class CodeInsightTestFixtureImpl extends BaseFixture implements CodeInsig
   private boolean myCaresAboutInjection = true;
   private VirtualFilePointerTracker myVirtualFilePointerTracker;
 
+  @TestOnly
   public CodeInsightTestFixtureImpl(@NotNull IdeaProjectTestFixture projectFixture, @NotNull TempDirTestFixture tempDirTestFixture) {
     myProjectFixture = projectFixture;
     myTempDirFixture = tempDirTestFixture;
@@ -239,6 +239,7 @@ public class CodeInsightTestFixtureImpl extends BaseFixture implements CodeInsig
     throw new AssertionError("Unable to highlight after " + retries + " retries", exception);
   }
 
+  @TestOnly
   public static void ensureIndexesUpToDate(@NotNull Project project) {
     if (!DumbService.isDumb(project)) {
       ReadAction.run(() -> {

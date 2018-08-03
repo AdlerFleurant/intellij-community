@@ -32,17 +32,18 @@ import java.util.Map;
 /**
  * @author cdr
  */
-@TestOnly
 public class EditorListenerTracker {
   private final Map<Class<? extends EventListener>, List<? extends EventListener>> before;
   private final boolean myDefaultProjectInitialized;
 
+  @TestOnly
   public EditorListenerTracker() {
     EncodingManager.getInstance(); //adds listeners
     before = ((EditorEventMulticasterImpl)EditorFactory.getInstance().getEventMulticaster()).getListeners();
     myDefaultProjectInitialized = ((ProjectManagerImpl)ProjectManager.getInstance()).isDefaultProjectInitialized();
   }
 
+  @TestOnly
   public void checkListenersLeak() throws AssertionError {
     try {
       // listeners may hang on default project

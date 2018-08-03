@@ -6,7 +6,7 @@ package com.intellij.testFramework;
 import com.intellij.ide.IdeEventQueue;
 import com.intellij.openapi.util.EmptyRunnable;
 import com.intellij.util.ui.UIUtil;
-import sun.awt.AWTAutoShutdown;
+//import sun.awt.AWTAutoShutdown;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,7 +25,7 @@ public class TestRunnerUtil {
     if (SwingUtilities.isEventDispatchThread()) {
       throw new RuntimeException("must not call under EDT");
     }
-    AWTAutoShutdown.getInstance().notifyThreadBusy(Thread.currentThread());
+    //AWTAutoShutdown.getInstance().notifyThreadBusy(Thread.currentThread());
     UIUtil.pump();
     // in JDK 1.6 java.awt.EventQueue.push() causes slow painful death of current EDT
     // so we have to wait through its agony to termination

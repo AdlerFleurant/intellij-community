@@ -43,12 +43,12 @@ import java.util.Set;
  * }
  * }</pre>
  */
-@TestOnly
 public class VirtualFilePointerTracker {
   private static final Set<VirtualFilePointerImpl> storedPointers = ContainerUtil.newIdentityTroveSet();
   private static Throwable trace;
   private static boolean isTracking; // true when storePointers() was called but before assertPointersDisposed(). false otherwise
 
+  @TestOnly
   public VirtualFilePointerTracker() {
     storePointers();
   }
@@ -65,6 +65,7 @@ public class VirtualFilePointerTracker {
     isTracking = true;
   }
 
+  @TestOnly
   public synchronized void assertPointersAreDisposed() {
     if (!isTracking) {
       throw new IllegalStateException("Double call of assertPointersAreDisposed() - see 'Caused by:' for the previous call", trace);
