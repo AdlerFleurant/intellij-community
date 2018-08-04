@@ -95,7 +95,8 @@ include(
   "intellij.java.resources",
   "intellij.jsp.spi",
   "intellij.java.execution",
-  "intellij.platform.testFramework"
+  "intellij.platform.testFramework",
+  "intellij.java.guiForms.compiler"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -187,3 +188,4 @@ project(":intellij.java.resources").projectDir = file("resources")
 project(":intellij.jsp.spi").projectDir = file("java/jsp-spi")
 project(":intellij.java.execution").projectDir = file("java/execution/openapi")
 project(":intellij.platform.testFramework").projectDir = file("platform/testFramework")
+project(":intellij.java.guiForms.compiler").projectDir = file("java/compiler/forms-compiler")

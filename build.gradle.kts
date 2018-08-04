@@ -14,6 +14,9 @@ allprojects {
     maven("https://dl.bintray.com/groovy/maven/")
     maven("https://jitpack.io")
     maven("https://maven.atlassian.com/content/repositories/atlassian-public")
+    flatDir{
+      dirs("${rootProject.rootDir}/lib")
+    }
   }
 
   afterEvaluate {

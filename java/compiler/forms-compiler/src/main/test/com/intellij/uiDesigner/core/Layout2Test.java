@@ -15,17 +15,19 @@
  */
 package com.intellij.uiDesigner.core;
 
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import javax.swing.*;
 import java.awt.*;
 
-public final class Layout2Test extends TestCase{
+public final class Layout2Test {
   /**
    * button 1
    * <empty>
    * button 2 
-   */ 
+   */
+  @Test
   public void test1() {
     final GridLayoutManager layoutManager = new GridLayoutManager(3,1, new Insets(0,0,0,0), 0, 0);
     final JPanel panel = new JPanel(layoutManager);
@@ -46,17 +48,17 @@ public final class Layout2Test extends TestCase{
 
     panel.doLayout();
 
-    assertEquals(20, panel.getPreferredSize().height);
-    assertEquals(50, panel.getPreferredSize().width);
+   Assertions.assertEquals(20, panel.getPreferredSize().height);
+   Assertions.assertEquals(50, panel.getPreferredSize().width);
     
-    assertEquals(17, panel.getMinimumSize().height);
-    assertEquals(50, panel.getMinimumSize().width);
+   Assertions.assertEquals(17, panel.getMinimumSize().height);
+   Assertions.assertEquals(50, panel.getMinimumSize().width);
     
     panel.setSize(new Dimension(500, 100));
     panel.doLayout();
 
-    assertEquals(50, button1.getHeight());
-    assertEquals(50, button2.getHeight());
+   Assertions.assertEquals(50, button1.getHeight());
+   Assertions.assertEquals(50, button2.getHeight());
   }
   
 }

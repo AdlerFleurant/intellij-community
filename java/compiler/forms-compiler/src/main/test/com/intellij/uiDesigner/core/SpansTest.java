@@ -15,12 +15,14 @@
  */
 package com.intellij.uiDesigner.core;
 
-import junit.framework.TestCase;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import javax.swing.*;
 import java.awt.*;
 
-public final class SpansTest extends TestCase {
+public final class SpansTest {
   public static void setDefaults(Component component) {
     // GridLayoutManager use min and max component size for calc final size: com.intellij.uiDesigner.core.Util.adjustSize
     // sets min size < avg values in tests
@@ -33,6 +35,7 @@ public final class SpansTest extends TestCase {
    * button(can grow) | text field (want grow)
    * text field (want grow, span 2)
    */
+  @Test
   public void test1() {
     final GridLayoutManager layout = new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), 0, 0);
     final JPanel panel = new JPanel(layout);
@@ -59,14 +62,14 @@ public final class SpansTest extends TestCase {
 
     panel.doLayout();
 
-    assertEquals(130, panel.getPreferredSize().width);
+    Assertions.assertEquals(130, panel.getPreferredSize().width);
 
     panel.setSize(new Dimension(500, panel.getHeight()));
     panel.doLayout();
 
-    assertEquals(500, field2.getWidth());
-    assertEquals(80, button.getWidth());
-    assertEquals(420, field1.getWidth());
+    Assertions.assertEquals(500, field2.getWidth());
+    Assertions.assertEquals(80, button.getWidth());
+    Assertions.assertEquals(420, field1.getWidth());
   }
 
 
@@ -74,6 +77,7 @@ public final class SpansTest extends TestCase {
    * button(can grow) | text field (can grow)
    * text field (want grow, span 2)
    */
+  @Test
   public void test2() {
     final JPanel panel = new JPanel(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), 0, 0));
 
@@ -99,19 +103,20 @@ public final class SpansTest extends TestCase {
 
     panel.doLayout();
 
-    assertEquals(160, panel.getPreferredSize().width);
+    Assertions.assertEquals(160, panel.getPreferredSize().width);
 
     panel.setSize(new Dimension(500, panel.getHeight()));
     panel.doLayout();
 
-    assertEquals(500, field2.getWidth());
-    assertEquals(250, button.getWidth());
-    assertEquals(250, field1.getWidth());
+    Assertions.assertEquals(500, field2.getWidth());
+    Assertions.assertEquals(250, button.getWidth());
+    Assertions.assertEquals(250, field1.getWidth());
   }
 
   /**
    * button(can grow) | text field (want grow, span 2)
    */
+  @Test
   public void test3() {
     final JPanel panel = new JPanel(new GridLayoutManager(1, 3, new Insets(0, 0, 0, 0), 0, 0));
 
@@ -131,19 +136,20 @@ public final class SpansTest extends TestCase {
 
     panel.doLayout();
 
-    assertEquals(190, panel.getPreferredSize().width);
+    Assertions.assertEquals(190, panel.getPreferredSize().width);
 
     panel.setSize(new Dimension(500, panel.getHeight()));
     panel.doLayout();
 
-    assertEquals(80, button.getWidth());
-    assertEquals(420, field1.getWidth());
+    Assertions.assertEquals(80, button.getWidth());
+    Assertions.assertEquals(420, field1.getWidth());
   }
 
   /**
    * button (can grow, span 2 )       | text field 1 (span 1)
    * text field 2 (want grow, span 2) | empty
    */
+  @Test
   public void test4() {
     final GridLayoutManager layoutManager = new GridLayoutManager(2, 3, new Insets(0, 0, 0, 0), 0, 0);
     final JPanel panel = new JPanel(layoutManager);
@@ -175,17 +181,18 @@ public final class SpansTest extends TestCase {
 
     // field will be not null after getPreferredSize()
     final DimensionInfo horizontalInfo = layoutManager.myHorizontalInfo;
-    assertEquals(GridConstraints.SIZEPOLICY_WANT_GROW | GridConstraints.SIZEPOLICY_CAN_GROW, horizontalInfo.getCellSizePolicy(0));
-    assertEquals(GridConstraints.SIZEPOLICY_CAN_SHRINK, horizontalInfo.getCellSizePolicy(1));
-    assertEquals(GridConstraints.SIZEPOLICY_WANT_GROW, horizontalInfo.getCellSizePolicy(2));
+    Assertions
+      .assertEquals(GridConstraints.SIZEPOLICY_WANT_GROW | GridConstraints.SIZEPOLICY_CAN_GROW, horizontalInfo.getCellSizePolicy(0));
+    Assertions.assertEquals(GridConstraints.SIZEPOLICY_CAN_SHRINK, horizontalInfo.getCellSizePolicy(1));
+    Assertions.assertEquals(GridConstraints.SIZEPOLICY_WANT_GROW, horizontalInfo.getCellSizePolicy(2));
 
-    assertEquals(220, preferredSize.width);
+    Assertions.assertEquals(220, preferredSize.width);
 
     panel.setSize(new Dimension(500, panel.getHeight()));
     panel.doLayout();
 
-    assertEquals(250, button.getWidth());
-    assertEquals(250, field1.getWidth());
-    assertEquals(250, field2.getWidth());
+    Assertions.assertEquals(250, button.getWidth());
+    Assertions.assertEquals(250, field1.getWidth());
+    Assertions.assertEquals(250, field2.getWidth());
   }
 }

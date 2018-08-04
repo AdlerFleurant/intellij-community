@@ -15,14 +15,17 @@
  */
 package com.intellij.uiDesigner.core;
 
-import junit.framework.TestCase;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import javax.swing.*;
 import java.awt.*;
 
 import static com.intellij.uiDesigner.core.SpansTest.setDefaults;
 
-public final class Layout3Test extends TestCase {
+public final class Layout3Test {
+  @Test
   public void test1() {
     final JPanel panel = new JPanel(new GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), 0, 0));
 
@@ -41,6 +44,6 @@ public final class Layout3Test extends TestCase {
 
     panel.doLayout();
 
-    assertEquals(140, panel.getPreferredSize().height);
+    Assertions.assertEquals(140, panel.getPreferredSize().height);
   }
 }

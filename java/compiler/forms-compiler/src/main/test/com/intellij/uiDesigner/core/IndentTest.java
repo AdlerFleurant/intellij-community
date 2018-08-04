@@ -15,7 +15,8 @@
  */
 package com.intellij.uiDesigner.core;
 
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +24,8 @@ import java.awt.*;
 /**
  * @author yole
  */
-public class IndentTest extends TestCase {
+public class IndentTest {
+  @Test
   public void testSimple() {
     final GridLayoutManager layout = new GridLayoutManager(1,1, new Insets(0,0,0,0), 0, 0);
     final JPanel panel = new JPanel(layout);
@@ -36,13 +38,13 @@ public class IndentTest extends TestCase {
       GridConstraints.SIZEPOLICY_WANT_GROW | GridConstraints.SIZEPOLICY_CAN_SHRINK, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 1));
     panel.doLayout();
 
-    assertEquals(15, panel.getMinimumSize().width);
-    assertEquals(20, panel.getPreferredSize().width);
+   Assertions.assertEquals(15, panel.getMinimumSize().width);
+   Assertions.assertEquals(20, panel.getPreferredSize().width);
 
     panel.setSize(new Dimension(100, 100));
     panel.doLayout();
 
-    assertEquals(10, field1.getBounds().x);
-    assertEquals(90, field1.getBounds().width);
+   Assertions.assertEquals(10, field1.getBounds().x);
+   Assertions.assertEquals(90, field1.getBounds().width);
   }
 }
