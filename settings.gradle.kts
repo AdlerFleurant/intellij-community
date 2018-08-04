@@ -74,6 +74,7 @@ include(
   "intellij.platform.vcs.impl",
   "intellij.platform.lvcs.impl",
   "intellij.java.compiler.instrumentationUtil",
+  "intellij.java.compiler.instrumentationUtil.java8",
   "intellij.jsp.base",
   "intellij.regexp",
   "intellij.xml.dom.impl",
@@ -166,6 +167,7 @@ project(":intellij.platform.lang.impl").projectDir = file("platform/lang-impl")
 project(":intellij.platform.vcs.impl").projectDir = file("platform/vcs-impl")
 project(":intellij.platform.lvcs.impl").projectDir = file("platform/lvcs-impl")
 project(":intellij.java.compiler.instrumentationUtil").projectDir = file("java/compiler/instrumentation-util")
+project(":intellij.java.compiler.instrumentationUtil.java8").projectDir = file("java/compiler/instrumentation-util-8")
 project(":intellij.jsp.base").projectDir = file("java/jsp-base-openapi")
 project(":intellij.regexp").projectDir = file("RegExpSupport")
 project(":intellij.xml.dom.impl").projectDir = file("xml/dom-impl")
