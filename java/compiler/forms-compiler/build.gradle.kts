@@ -15,7 +15,7 @@ dependencies{
   implementation(Dependencies.asm)
   implementation(Dependencies.`jgoodies-forms`)
 
-  testImplementation(Dependencies.`junit-jupiter-api`)
+  testImplementation(Dependencies.JUnit5)
 
-  testRuntimeOnly(Dependencies.`junit-jupiter-engine`)
+  testRuntimeOnly(Dependencies.JUnit5_rt)
 }
