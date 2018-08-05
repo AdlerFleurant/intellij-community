@@ -98,7 +98,11 @@ include(
   "intellij.java.execution",
   "intellij.platform.testFramework",
   "intellij.java.guiForms.compiler",
-  "intellij.java.compiler.antTasks"
+  "intellij.java.compiler.antTasks",
+  "intellij.java.structureView"
+//  "intellij.java.impl"
+//  "intellij.java.compiler.impl",
+//  "intellij.java.compiler.tests"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -193,3 +197,7 @@ project(":intellij.java.execution").projectDir = file("java/execution/openapi")
 project(":intellij.platform.testFramework").projectDir = file("platform/testFramework")
 project(":intellij.java.guiForms.compiler").projectDir = file("java/compiler/forms-compiler")
 project(":intellij.java.compiler.antTasks").projectDir = file("java/compiler/javac2")
+project(":intellij.java.structureView").projectDir = file("java/java-structure-view")
+//project(":intellij.java.impl").projectDir = file("java/java-impl")
+//project(":intellij.java.compiler.impl").projectDir = file("java/compiler/impl")
+//project(":intellij.java.compiler.tests").projectDir = file("java/compiler/tests")
