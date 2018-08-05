@@ -99,7 +99,9 @@ include(
   "intellij.platform.testFramework",
   "intellij.java.guiForms.compiler",
   "intellij.java.compiler.antTasks",
-  "intellij.java.structureView"
+  "intellij.java.structureView",
+  "intellij.java.indexing.impl"
+//  "intellij.java.analysis.impl"
 //  "intellij.java.impl"
 //  "intellij.java.compiler.impl",
 //  "intellij.java.compiler.tests"
@@ -198,6 +200,8 @@ project(":intellij.platform.testFramework").projectDir = file("platform/testFram
 project(":intellij.java.guiForms.compiler").projectDir = file("java/compiler/forms-compiler")
 project(":intellij.java.compiler.antTasks").projectDir = file("java/compiler/javac2")
 project(":intellij.java.structureView").projectDir = file("java/java-structure-view")
+project(":intellij.java.indexing.impl").projectDir = file("java/java-indexing-impl")
+//project(":intellij.java.analysis.impl").projectDir = file("java/java-analysis-impl")
 //project(":intellij.java.impl").projectDir = file("java/java-impl")
 //project(":intellij.java.compiler.impl").projectDir = file("java/compiler/impl")
 //project(":intellij.java.compiler.tests").projectDir = file("java/compiler/tests")
