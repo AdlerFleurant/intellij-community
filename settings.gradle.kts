@@ -97,7 +97,8 @@ include(
   "intellij.jsp.spi",
   "intellij.java.execution",
   "intellij.platform.testFramework",
-  "intellij.java.guiForms.compiler"
+  "intellij.java.guiForms.compiler",
+  "intellij.java.compiler.antTasks"
 )
 
 project(":intellij.platform.util.rt").projectDir = file("platform/util-rt")
@@ -191,3 +192,4 @@ project(":intellij.jsp.spi").projectDir = file("java/jsp-spi")
 project(":intellij.java.execution").projectDir = file("java/execution/openapi")
 project(":intellij.platform.testFramework").projectDir = file("platform/testFramework")
 project(":intellij.java.guiForms.compiler").projectDir = file("java/compiler/forms-compiler")
+project(":intellij.java.compiler.antTasks").projectDir = file("java/compiler/javac2")

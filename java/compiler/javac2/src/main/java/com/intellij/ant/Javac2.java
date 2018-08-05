@@ -1,18 +1,4 @@
-/*
- * Copyright 2000-2016 JetBrains s.r.o.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+// Copyright 2000-2018 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
 package com.intellij.ant;
 
 import com.intellij.compiler.instrumentation.FailSafeClassReader;
@@ -36,18 +22,18 @@ import java.util.*;
 
 public class Javac2 extends Javac {
   public static final String PROPERTY_INSTRUMENTATION_INCLUDE_JAVA_RUNTIME = "javac2.instrumentation.includeJavaRuntime";
-  private ArrayList myFormFiles;
-  private List myNestedFormPathList;
+  private List<File> myFormFiles;
+  private List<PrefixedPath> myNestedFormPathList;
   private boolean instrumentNotNull = true;
   private String myNotNullAnnotations = "org.jetbrains.annotations.NotNull";
-  private final List<Regexp> myClassFilterAnnotationRegexpList = new ArrayList<Regexp>(0);
+  private final List<Regexp> myClassFilterAnnotationRegexpList = new ArrayList<>(0);
 
   public Javac2() {
   }
 
   /**
    * Check if Java classes should be actually compiled by the task. This method is overridden by
-   * {@link com.intellij.ant.InstrumentIdeaExtensions} task in order to suppress actual compilation
+   * {@link InstrumentIdeaExtensions} task in order to suppress actual compilation
    * of the java sources.
    *
    * @return true if the java classes are compiled, false if just instrumentation is performed.
@@ -205,7 +191,7 @@ public class Javac2 extends Javac {
    * compilation.
    * @param nestedformdirs a list of {@link PrefixedPath}
    */
-  public void setNestedformdirs(List nestedformdirs) {
+  public void setNestedformdirs(List<PrefixedPath> nestedformdirs) {
     myNestedFormPathList = nestedformdirs;
   }
 
@@ -225,7 +211,7 @@ public class Javac2 extends Javac {
   public PrefixedPath createNestedformdirs() {
     PrefixedPath p = new PrefixedPath(getProject());
     if (myNestedFormPathList == null) {
-      myNestedFormPathList = new ArrayList();
+      myNestedFormPathList = new ArrayList<>();
     }
     myNestedFormPathList.add(p);
     return p;
@@ -268,29 +254,28 @@ public class Javac2 extends Javac {
    */
   private void instrumentForms(final InstrumentationClassFinder finder) {
     // we instrument every file, because we cannot find which files should not be instrumented without dependency storage
-    final ArrayList formsToInstrument = myFormFiles;
+    final List<File> formsToInstrument = myFormFiles;
 
     if (formsToInstrument.size() == 0) {
       log("No forms to instrument found", Project.MSG_VERBOSE);
       return;
     }
 
-    final HashMap class2form = new HashMap();
+    final Map<String, File> class2form = new HashMap<>();
 
-    for (int i = 0; i < formsToInstrument.size(); i++) {
-      final File formFile = (File)formsToInstrument.get(i);
+    for (File aFormsToInstrument : formsToInstrument) {
 
-      log("compiling form " + formFile.getAbsolutePath(), Project.MSG_VERBOSE);
+      log("compiling form " + aFormsToInstrument.getAbsolutePath(), Project.MSG_VERBOSE);
       final LwRootContainer rootContainer;
       try {
-        rootContainer = Utils.getRootContainer(formFile.toURI().toURL(), new CompiledClassPropertiesProvider(finder.getLoader()));
+        rootContainer = Utils.getRootContainer(aFormsToInstrument.toURI().toURL(), new CompiledClassPropertiesProvider(finder.getLoader()));
       }
       catch (AlienFormFileException e) {
         // ignore non-IDEA forms
         continue;
       }
       catch (Exception e) {
-        fireError("Cannot process form file " + formFile.getAbsolutePath() + ". Reason: " + e);
+        fireError("Cannot process form file " + aFormsToInstrument.getAbsolutePath() + ". Reason: " + e);
         continue;
       }
 
@@ -302,13 +287,13 @@ public class Javac2 extends Javac {
       String name = classToBind.replace('.', '/');
       File classFile = getClassFile(name);
       if (classFile == null) {
-        log(formFile.getAbsolutePath() + ": Class to bind does not exist: " + classToBind, Project.MSG_WARN);
+        log(aFormsToInstrument.getAbsolutePath() + ": Class to bind does not exist: " + classToBind, Project.MSG_WARN);
         continue;
       }
 
       final File alreadyProcessedForm = (File)class2form.get(classToBind);
       if (alreadyProcessedForm != null) {
-        fireError(formFile.getAbsolutePath() +
+        fireError(aFormsToInstrument.getAbsolutePath() +
                   ": " +
                   "The form is bound to the class " +
                   classToBind +
@@ -318,7 +303,7 @@ public class Javac2 extends Javac {
                   " is also bound to this class.");
         continue;
       }
-      class2form.put(classToBind, formFile);
+      class2form.put(classToBind, aFormsToInstrument);
 
       try {
         int version;
@@ -335,23 +320,23 @@ public class Javac2 extends Javac {
         codeGenerator.patchFile(classFile);
         final FormErrorInfo[] warnings = codeGenerator.getWarnings();
 
-        for (int j = 0; j < warnings.length; j++) {
-          log(formFile.getAbsolutePath() + ": " + warnings[j].getErrorMessage(), Project.MSG_WARN);
+        for (FormErrorInfo warning : warnings) {
+          log(aFormsToInstrument.getAbsolutePath() + ": " + warning.getErrorMessage(), Project.MSG_WARN);
         }
         final FormErrorInfo[] errors = codeGenerator.getErrors();
         if (errors.length > 0) {
-          StringBuffer message = new StringBuffer();
-          for (int j = 0; j < errors.length; j++) {
+          StringBuilder message = new StringBuilder();
+          for (FormErrorInfo error : errors) {
             if (message.length() > 0) {
               message.append("\n");
             }
-            message.append(formFile.getAbsolutePath()).append(": ").append(errors[j].getErrorMessage());
+            message.append(aFormsToInstrument.getAbsolutePath()).append(": ").append(error.getErrorMessage());
           }
           fireError(message.toString());
         }
       }
       catch (Exception e) {
-        fireError("Forms instrumentation failed for " + formFile.getAbsolutePath() + ": " + e.toString());
+        fireError("Forms instrumentation failed for " + aFormsToInstrument.getAbsolutePath() + ": " + e.toString());
       }
     }
   }
@@ -369,7 +354,7 @@ public class Javac2 extends Javac {
    * @return a URL classloader
    */
   private InstrumentationClassFinder buildClasspathClassLoader() {
-    final StringBuffer classPathBuffer = new StringBuffer();
+    final StringBuilder classPathBuilder = new StringBuilder();
     final Project project = getProject();
     final Path cp = new Path(project);
     appendPath(cp, getBootclasspath());
@@ -397,13 +382,12 @@ public class Javac2 extends Javac {
     cp.addExtdirs(getExtdirs());
 
     final String[] pathElements = cp.list();
-    for (int i = 0; i < pathElements.length; i++) {
-      final String pathElement = pathElements[i];
-      classPathBuffer.append(File.pathSeparator);
-      classPathBuffer.append(pathElement);
+    for (final String pathElement : pathElements) {
+      classPathBuilder.append(File.pathSeparator);
+      classPathBuilder.append(pathElement);
     }
 
-    final String classPath = classPathBuffer.toString();
+    final String classPath = classPathBuilder.toString();
     log("classpath=" + classPath, Project.MSG_VERBOSE);
 
     try {
@@ -451,8 +435,7 @@ public class Javac2 extends Javac {
   private int instrumentNotNull(File dir, final InstrumentationClassFinder finder) {
     int instrumented = 0;
     final File[] files = dir.listFiles();
-    for (int i = 0; i < files.length; i++) {
-      File file = files[i];
+    for (File file : files) {
       final String name = file.getName();
       if (name.endsWith(".class")) {
         final String path = file.getPath();
@@ -463,7 +446,7 @@ public class Javac2 extends Javac {
             FailSafeClassReader reader = new FailSafeClassReader(inputStream);
 
             int version = getClassFileVersion(reader);
-            
+
             if (version >= Opcodes.V1_5 && !shouldBeSkippedByAnnotationPattern(reader)) {
               ClassWriter writer = new InstrumenterClassWriter(reader, getAsmClassWriterFlags(version), finder);
 
@@ -558,13 +541,12 @@ public class Javac2 extends Javac {
 
   protected void resetFileLists() {
     super.resetFileLists();
-    myFormFiles = new ArrayList();
+    myFormFiles = new ArrayList<>();
   }
 
   protected void scanDir(final File srcDir, final File destDir, final String[] files) {
     super.scanDir(srcDir, destDir, files);
-    for (int i = 0; i < files.length; i++) {
-      final String file = files[i];
+    for (final String file : files) {
       if (file.endsWith(".form")) {
         log("Found form file " + file, Project.MSG_VERBOSE);
         myFormFiles.add(new File(srcDir, file));
@@ -573,7 +555,7 @@ public class Javac2 extends Javac {
   }
 
   private static InstrumentationClassFinder createInstrumentationClassFinder(final String classPath, boolean shouldIncludeJavaRuntime) throws MalformedURLException {
-    final ArrayList urls = new ArrayList();
+    final List<URL> urls = new ArrayList<>();
     if (shouldIncludeJavaRuntime) {
       final URL jrt = tryGetJrtURL();
       if (jrt != null) {
@@ -584,14 +566,14 @@ public class Javac2 extends Javac {
       final String s = tokenizer.nextToken();
       urls.add(new File(s).toURI().toURL());
     }
-    final URL[] urlsArr = (URL[])urls.toArray(new URL[0]);
+    final URL[] urlsArr = urls.toArray(new URL[0]);
     return new InstrumentationClassFinder(urlsArr);
   }
 
   private class AntNestedFormLoader implements NestedFormLoader {
     private final ClassLoader myLoader;
     private final List myNestedFormPathList;
-    private final HashMap myFormCache = new HashMap();
+    private final Map<String, LwRootContainer> myFormCache = new HashMap<>();
 
     public AntNestedFormLoader(final ClassLoader loader, List nestedFormPathList) {
       myLoader = loader;
@@ -600,13 +582,12 @@ public class Javac2 extends Javac {
 
     public LwRootContainer loadForm(String formFilePath) throws Exception {
       if (myFormCache.containsKey(formFilePath)) {
-        return (LwRootContainer)myFormCache.get(formFilePath);
+        return myFormCache.get(formFilePath);
       }
 
       String lowerFormFilePath = formFilePath.toLowerCase();
       log("Searching for form " + lowerFormFilePath, Project.MSG_VERBOSE);
-      for (Iterator iterator = myFormFiles.iterator(); iterator.hasNext();) {
-        File file = (File)iterator.next();
+      for (File file : myFormFiles) {
         String name = file.getAbsolutePath().replace(File.separatorChar, '/').toLowerCase();
         log("Comparing with " + name, Project.MSG_VERBOSE);
         if (name.endsWith(lowerFormFilePath)) {
@@ -615,8 +596,8 @@ public class Javac2 extends Javac {
       }
 
       if (myNestedFormPathList != null) {
-        for (int i = 0; i < myNestedFormPathList.size(); i++) {
-          PrefixedPath path = (PrefixedPath)myNestedFormPathList.get(i);
+        for (Object aMyNestedFormPathList : myNestedFormPathList) {
+          PrefixedPath path = (PrefixedPath)aMyNestedFormPathList;
           File formFile = path.findFile(formFilePath);
           if (formFile != null) {
             return loadForm(formFilePath, new FileInputStream(formFile));
