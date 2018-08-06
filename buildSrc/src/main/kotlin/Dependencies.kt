@@ -3,6 +3,10 @@ private val asmVersion = "5.0.3"
 private val baksmaliVersion = "2.2.1"
 private val androidToolsVersion = "26.1.2"
 
+object Versions {
+  val `kotlin-jvm` = "1.2.60"
+}
+
 object Dependencies {
   val activation = "javax.activation:activation:1.1.1"
   val `analytics-protos` = "com.android.tools.analytics-library:protos:26.1.2"

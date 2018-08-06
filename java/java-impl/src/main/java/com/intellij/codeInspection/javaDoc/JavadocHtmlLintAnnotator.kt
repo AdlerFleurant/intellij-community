@@ -34,7 +34,6 @@ import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiJavaFile
 import com.intellij.psi.javadoc.PsiDocComment
 import com.intellij.psi.util.PsiTreeUtil
-import com.sun.tools.doclint.DocLint
 import java.io.File
 
 class JavadocHtmlLintAnnotator : ExternalAnnotator<JavadocHtmlLintAnnotator.Info, JavadocHtmlLintAnnotator.Result>() {
@@ -48,8 +47,7 @@ class JavadocHtmlLintAnnotator : ExternalAnnotator<JavadocHtmlLintAnnotator.Info
     runReadAction { if (isJava8SourceFile(file) && "/**" in file.text) Info(file) else null }
 
   override fun doAnnotate(collectedInfo: Info): Result? {
-    val text = runReadAction { if (collectedInfo.file.isValid) collectedInfo.file.text else null }
-    if (text == null) return null
+    val text = runReadAction { if (collectedInfo.file.isValid) collectedInfo.file.text else null } ?: return null
 
     val file = collectedInfo.file.virtualFile!!
     val copy = createTempFile(text.toByteArray(file.charset))
@@ -99,7 +97,7 @@ class JavadocHtmlLintAnnotator : ExternalAnnotator<JavadocHtmlLintAnnotator.Info
 
   private val key = lazy { HighlightDisplayKey.find(JavadocHtmlLintInspection.SHORT_NAME) }
 
-  private val lintOptions = "${DocLint.XMSGS_CUSTOM_PREFIX}html/private,accessibility/private"
+  private val lintOptions = "-Xmsgs:html/private,accessibility/private"
   private val lintPattern = "^.+:(\\d+):\\s+(error|warning):\\s+(.+)$".toPattern()
 
   private fun isJava8SourceFile(file: PsiFile) =
@@ -128,7 +126,7 @@ class JavadocHtmlLintAnnotator : ExternalAnnotator<JavadocHtmlLintAnnotator.Info
 
     parameters.charset = file.charset
     parameters.vmParametersList.addProperty("user.language", "en")
-    parameters.mainClass = DocLint::class.qualifiedName
+    parameters.mainClass = "com.sun.tools.doclint.DocLint"
     parameters.programParametersList.add(lintOptions)
     parameters.programParametersList.add(copy.path)
 

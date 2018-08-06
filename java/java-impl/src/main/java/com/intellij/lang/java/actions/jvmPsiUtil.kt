@@ -62,7 +62,7 @@ internal fun extractExpectedTypes(project: Project, expectedTypes: ExpectedTypes
 private fun toExpectedTypeInfo(project: Project, expectedType: ExpectedType): ExpectedTypeInfo? {
   if (expectedType is ExpectedJavaType) return expectedType.info
   val helper = JvmPsiConversionHelper.getInstance(project)
-  val psiType = helper.convertType(expectedType.theType) ?: return null
+  val psiType = helper.convertType(expectedType.theType)
   return createInfo(psiType, expectedType.theKind.infoKind(), psiType, TailType.NONE)
 }
 
