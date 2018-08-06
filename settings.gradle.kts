@@ -100,8 +100,8 @@ include(
   "intellij.java.guiForms.compiler",
   "intellij.java.compiler.antTasks",
   "intellij.java.structureView",
-  "intellij.java.indexing.impl",
-  "intellij.jvm.analysis"
+  "intellij.java.indexing.impl"
+//  "intellij.jvm.analysis"
 //  "intellij.jvm.analysis.impl"
 //  "intellij.java.analysis.impl"
 //  "intellij.java.impl"
@@ -203,8 +203,8 @@ project(":intellij.java.guiForms.compiler").projectDir = file("java/compiler/for
 project(":intellij.java.compiler.antTasks").projectDir = file("java/compiler/javac2")
 project(":intellij.java.structureView").projectDir = file("java/java-structure-view")
 project(":intellij.java.indexing.impl").projectDir = file("java/java-indexing-impl")
-project(":intellij.jvm.analysis").projectDir = file("java/java-analysis-api")
-//project(":intellij.jvm.analysis.impl").projectDir = file("java/java-analysis-impl")
+//project(":intellij.jvm.analysis").projectDir = file("jvm/jvm-analysis-api")
+//project(":intellij.jvm.analysis.impl").projectDir = file("jvm/jvm-analysis-impl")
 //project(":intellij.java.analysis.impl").projectDir = file("java/java-analysis-impl")
 //project(":intellij.java.impl").projectDir = file("java/java-impl")
 //project(":intellij.java.compiler.impl").projectDir = file("java/compiler/impl")

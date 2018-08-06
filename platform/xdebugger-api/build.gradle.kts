@@ -13,5 +13,5 @@ configure<JavaPluginConvention> {
 }
 
 dependencies {
-  implementation(project(":intellij.platform.lang"))
+  api(project(":intellij.platform.lang"))
 }
