@@ -43,6 +43,9 @@
   </component>
   <component name="JavacSettings">
     <option name="PREFER_TARGET_JDK_COMPILER" value="false" />
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="intellij.platform.lang.impl" options="--add-modules=java.corba" />
+    </option>
     <option name="MAXIMUM_HEAP_SIZE" value="400" />
   </component>
 </project>

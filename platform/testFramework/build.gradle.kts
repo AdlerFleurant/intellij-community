@@ -1,21 +1,6 @@
 plugins {
   `java-library`
-  kotlin("jvm") version "1.2.51"
-}
-
-configure<JavaPluginConvention> {
-  sourceCompatibility = JavaVersion.VERSION_1_10
-  targetCompatibility = JavaVersion.VERSION_1_10
-}
-
-tasks {
-  "compileJava"(JavaCompile::class) {
-    options.compilerArgs.addAll(listOf("--add-modules=java.corba"))
-  }
-
-  "compileKotlin"(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class) {
-    kotlinOptions.jvmTarget = "1.8"
-  }
+  kotlin("jvm")
 }
 
 dependencies {
@@ -25,10 +10,10 @@ dependencies {
   api(project(":intellij.platform.boot"))
   api(project(":intellij.platform.testFramework.core"))
   api(project(":intellij.java.rt"))
-  api("junit", "junit", "4.12")
-  api("log4j", "log4j", "1.2.17")
-  api("org.codehaus.groovy", "groovy-all", "2.4.15")
-  api("com.github.jetbrains", "jetCheck", "0.1")
+  api(Dependencies.JUnit4)
+  api(Dependencies.Log4J)
+  api(Dependencies.Groovy)
+  api(Dependencies.jetCheck)
 
   implementation(project(":intellij.tools.testsBootstrap"))
 

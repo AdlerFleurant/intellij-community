@@ -3,9 +3,6 @@ plugins {
 }
 
 configure<JavaPluginConvention> {
-  sourceCompatibility = JavaVersion.VERSION_1_10
-  targetCompatibility = JavaVersion.VERSION_1_10
-
   val sourceSet = sourceSets["main"]
   sourceSet.java.srcDirs.clear()
   sourceSet.java.srcDir("src")
@@ -13,7 +10,8 @@ configure<JavaPluginConvention> {
 }
 
 dependencies {
+  api(project(":intellij.jsp.base"))
+
   implementation(project(":intellij.platform.util"))
   implementation(project(":intellij.java"))
-  api(project(":intellij.jsp.base"))
 }

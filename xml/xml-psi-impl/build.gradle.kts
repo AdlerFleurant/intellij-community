@@ -3,9 +3,6 @@ plugins {
 }
 
 configure<JavaPluginConvention> {
-  sourceCompatibility = JavaVersion.VERSION_1_10
-  targetCompatibility = JavaVersion.VERSION_1_10
-
   val sourceSet = sourceSets["main"]
   sourceSet.java.srcDirs.clear()
   sourceSet.java.srcDir("src")
@@ -24,7 +21,7 @@ dependencies {
   implementation(project(":intellij.platform.projectModel.impl"))
   implementation(project(":intellij.platform.indexing.impl"))
   implementation(project(":intellij.platform.lang"))
-  implementation("xerces", "xercesImpl", "2.11.0")
-  implementation("org.apache.xmlbeans", "xmlbeans", "2.6.0")
-  implementation("xml-resolver", "xml-resolver", "1.2")
+  implementation(Dependencies.Xerces)
+  implementation(Dependencies.XmlBeans)
+  implementation(Dependencies.`xml-resolver`)
 }

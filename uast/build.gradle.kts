@@ -9,7 +9,7 @@ val intellij_core_version: String by project
 
 plugins {
   `java-library`
-  kotlin("jvm") version "1.2.51"
+  kotlin("jvm")
   `maven-publish`
   id("com.github.johnrengelman.shadow").version("2.0.4").apply(false)
   id("com.jfrog.bintray").version("1.8.4").apply(false)
@@ -49,9 +49,6 @@ allprojects {
   apply(plugin = "com.jfrog.bintray")
 
   configure<JavaPluginConvention> {
-    sourceCompatibility = JavaVersion.VERSION_1_10
-    targetCompatibility = JavaVersion.VERSION_1_10
-
     val mainSourceSet = sourceSets["main"]
     mainSourceSet.java.srcDirs.clear()
     mainSourceSet.java.srcDir("src")

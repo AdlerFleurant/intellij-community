@@ -14,30 +14,10 @@
     <orderEntry type="module" module-name="intellij.platform.lang.impl" />
     <orderEntry type="module" module-name="intellij.platform.testFramework" scope="TEST" />
     <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/rngom-20051226-patched.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$MODULE_DIR$/lib/rngom-src.zip!/src" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
       <library name="isorelax" type="repository">
         <properties maven-id="isorelax:isorelax:20030108" />
         <CLASSES>
           <root url="jar://$MAVEN_REPOSITORY$/isorelax/isorelax/20030108/isorelax-20030108.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/trang-core.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -53,5 +33,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="rngom-20051226-patched" level="project" />
+    <orderEntry type="library" name="trang-core" level="project" />
   </component>
 </module>

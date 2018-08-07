@@ -31,11 +31,7 @@ public class Functions {
   }
 
   public static <A, B> Function<A, B> constant(final B b) {
-    return new Function<A, B>() {
-      public B fun(A a) {
-        return b;
-      }
-    };
+    return a -> b;
   }
 
   public static <A, B> Function<A, B> identity() {
@@ -49,13 +45,9 @@ public class Functions {
   public static <A, B, C> Function<A, C> compose(final Function<A, B> f1, final Function<B, ? extends C> f2) {
     if (f1 == Function.ID || f2 == Function.ID) {
       //noinspection RedundantConditionalExpression
-      return f1 == f2 ? Function.ID : f1 == Function.ID ? f2 : f1;
+      return (Function<A, C>) (f1 == f2 ? Function.ID : f1 == Function.ID ? f2 : f1);
     } 
-    return new Function<A, C>() {
-      public C fun(A a) {
-        return f2.fun(f1.fun(a));
-      }
-    };
+    return a -> f2.fun(f1.fun(a));
   }
 
   public static <A> Function<A, String> TO_STRING() {
@@ -63,34 +55,18 @@ public class Functions {
   }
 
   public static <A, B> Function<A, B> fromMap(final Map<A, B> map) {
-    return new Function<A, B>() {
-      public B fun(A a) {
-        return map.get(a);
-      }
-    };
+    return a -> map.get(a);
   }
 
-  private static final Function<Object, Class> TO_CLASS = new Function<Object, Class>() {
-    public Class fun(Object o) {
-      return o.getClass();
-    }
-  };
+  private static final Function<Object, Class> TO_CLASS = o -> o.getClass();
 
   public static <T> Function<T, Class> TO_CLASS() {
     return (Function<T, Class>)TO_CLASS;
   }
 
-  private static final Function PAIR_FIRST = new Function<Pair<?, ?>, Object>() {
-    public Object fun(Pair<?, ?> pair) {
-      return Pair.getFirst(pair);
-    }
-  };
+  private static final Function PAIR_FIRST = (Function<Pair<?, ?>, Object>)pair -> Pair.getFirst(pair);
 
-  private static final Function PAIR_SECOND = new Function<Pair<?, ?>, Object>() {
-    public Object fun(Pair<?, ?> pair) {
-      return Pair.getSecond(pair);
-    }
-  };
+  private static final Function PAIR_SECOND = (Function<Pair<?, ?>, Object>)pair -> Pair.getSecond(pair);
 
   public static <A> Function<Pair<A, ?>, A> pairFirst() {
     return (Function<Pair<A, ?>, A>)PAIR_FIRST;
@@ -100,11 +76,8 @@ public class Functions {
     return (Function<Pair<?, B>, B>)PAIR_SECOND;
   }
 
-  private static final Function WRAP_ARRAY = new Function<Object[], Iterable<Object>>() {
-    public Iterable<Object> fun(Object[] t) {
-      return t == null ? Collections.emptyList() : Arrays.asList(t);
-    }
-  };
+  private static final Function WRAP_ARRAY =
+    (Function<Object[], Iterable<Object>>)t -> t == null ? Collections.emptyList() : Arrays.asList(t);
 
   public static <T> Function<T[], Iterable<T>> wrapArray() {
     return (Function<T[], Iterable<T>>)WRAP_ARRAY;

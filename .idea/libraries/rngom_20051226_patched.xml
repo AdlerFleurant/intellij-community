@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="rngom-20051226-patched">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/rngom-20051226-patched.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/rngom-src.zip!/src" />
+    </SOURCES>
+  </library>
+</component>

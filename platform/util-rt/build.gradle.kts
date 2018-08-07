@@ -3,9 +3,6 @@ plugins {
 }
 
 configure<JavaPluginConvention> {
-  sourceCompatibility = JavaVersion.VERSION_1_6
-  targetCompatibility = JavaVersion.VERSION_1_6
-
   val sourceSet = sourceSets["main"]
   sourceSet.java.srcDirs.clear()
   sourceSet.java.srcDir("src")
@@ -17,7 +14,7 @@ repositories {
 }
 
 dependencies {
-  implementation("org.jetbrains", "annotations-java5", "16.0.2")
-  runtimeOnly("com.jgoodies", "jgoodies-common", "1.4.0")
-  runtimeOnly("commons-net", "commons-net", "3.6")
+  implementation(Dependencies.`jetbrains-annotations-java5`)
+  runtimeOnly(Dependencies.`jgoodies-common`)
+  runtimeOnly(Dependencies.`commons-net`)
 }

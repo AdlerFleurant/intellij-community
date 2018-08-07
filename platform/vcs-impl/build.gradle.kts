@@ -1,28 +1,14 @@
 plugins {
   `java-library`
-  kotlin("jvm") version "1.2.51"
+  kotlin("jvm")
 }
 
 configure<JavaPluginConvention> {
-  sourceCompatibility = JavaVersion.VERSION_1_10
-  targetCompatibility = JavaVersion.VERSION_1_10
-
   val sourceSet = sourceSets["main"]
   sourceSet.java.srcDirs.clear()
   sourceSet.java.srcDir("src")
   sourceSet.resources.srcDirs.clear()
   sourceSet.resources.srcDir("resources")
-}
-
-repositories {
-  jcenter()
-  maven("http://dl.bintray.com/jetbrains/intellij-third-party-dependencies")
-}
-
-tasks{
-  "compileKotlin"(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class) {
-    kotlinOptions.jvmTarget = "1.8"
-  }
 }
 
 dependencies {
@@ -35,12 +21,12 @@ dependencies {
   implementation(project(":intellij.platform.ide"))
   implementation(project(":intellij.platform.jps.model.serialization"))
   implementation(project(":intellij.platform.vcs.log"))
-  implementation("commons-codec", "commons-codec", "1.10")
-  implementation("com.google.guava", "guava", "25.1-jre")
-  implementation("com.google.code.gson", "gson", "2.8.5")
-  implementation("org.swinglabs", "swingx-core", "1.6.2-2")
-  implementation("com.miglayout", "miglayout-swing", "5.1")
+  implementation(Dependencies.`commons-codec`)
+  implementation(Dependencies.Guava)
+  implementation(Dependencies.gson)
+  implementation(Dependencies.swingx)
+  implementation(Dependencies.`miglayout-swing`)
 
-  testImplementation("junit", "junit", "4.12")
-  //  testImplementation(project(":intellij.platform.testFramework"))
+  testImplementation(project(":intellij.platform.testFramework"))
+  testImplementation(Dependencies.JUnit4)
 }

@@ -3,9 +3,6 @@ plugins {
 }
 
 configure<JavaPluginConvention> {
-  sourceCompatibility = JavaVersion.VERSION_1_10
-  targetCompatibility = JavaVersion.VERSION_1_10
-
   val sourceSet = sourceSets["main"]
   sourceSet.java.srcDirs.clear()
   sourceSet.java.srcDir("src")
@@ -18,7 +15,7 @@ dependencies {
   implementation(project(":intellij.platform.lang"))
   implementation(project(":intellij.platform.lang.impl"))
   implementation(project(":intellij.xml.psi"))
-  implementation("jaxen", "jaxen", "1.1.6")
+  implementation(Dependencies.Jaxen)
 
   runtimeOnly(project(":intellij.xml.dom.impl"))
   runtimeOnly(project(":intellij.relaxng"))

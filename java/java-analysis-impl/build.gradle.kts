@@ -1,21 +1,12 @@
 plugins {
   `java-library`
-  kotlin("jvm") version Versions.`kotlin-jvm`
+  kotlin("jvm")
 }
 
 configure<JavaPluginConvention> {
-  sourceCompatibility = JavaVersion.VERSION_1_10
-  targetCompatibility = JavaVersion.VERSION_1_10
-
   val sourceSet = sourceSets["main"]
   sourceSet.java.srcDir("${rootProject.rootDir}/plugins/InspectionGadgets/InspectionGadgetsAnalysis/src/main/java")
   sourceSet.resources.srcDir("${rootProject.rootDir}/plugins/InspectionGadgets/InspectionGadgetsAnalysis/src/main/resources")
-}
-
-tasks {
-  "compileKotlin"(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class) {
-    kotlinOptions.jvmTarget = "1.8"
-  }
 }
 
 dependencies {

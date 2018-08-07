@@ -3,9 +3,6 @@ plugins {
 }
 
 configure<JavaPluginConvention> {
-  sourceCompatibility = JavaVersion.VERSION_1_10
-  targetCompatibility = JavaVersion.VERSION_1_10
-
   val sourceSet = sourceSets["main"]
   sourceSet.java.srcDirs.clear()
   sourceSet.java.srcDir("source")
@@ -21,7 +18,7 @@ dependencies {
   implementation(project(":intellij.java"))
   implementation(project(":intellij.platform.duplicates.analysis"))
   implementation(project(":intellij.platform.lang.impl"))
-  implementation("org.jetbrains.intellij.deps", "jdom", "2.0.6")
-  implementation("org.jetbrains.intellij.deps", "trove4j", "1.0.20160824")
-  implementation("org.codehaus.groovy", "groovy-all", "2.4.15")
+  implementation(Dependencies.jdom)
+  implementation(Dependencies.Trove4j)
+  implementation(Dependencies.Groovy)
 }

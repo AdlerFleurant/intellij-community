@@ -2,6 +2,7 @@ private val junitVersion = "5.2.0"
 private val asmVersion = "5.0.3"
 private val baksmaliVersion = "2.2.1"
 private val androidToolsVersion = "26.1.2"
+private val jmockVersion = "2.8.4"
 
 object Versions {
   val `kotlin-jvm` = "1.2.60"
@@ -10,6 +11,7 @@ object Versions {
 object Dependencies {
   val activation = "javax.activation:activation:1.1.1"
   val `analytics-protos` = "com.android.tools.analytics-library:protos:26.1.2"
+  val ant = "org.apache.ant:ant:1.10.5"
   val `archive-patcher` = arrayOf(":explainer:", ":generator:", ":shared:")
   val asm = ":asm-all:"
   val `asm-tools` = arrayOf(":asm:$asmVersion", ":asm-analysis:$asmVersion", ":asm-tree:$asmVersion")
@@ -63,8 +65,10 @@ object Dependencies {
   val jackson = "com.fasterxml.jackson.core:jackson-databind:2.9.6"
   val JaCoCo = arrayOf(":jacocoant:", "jacocoagent:")
   val JavaHelp = "javax.help:javahelp:2.0.02"
+  val javassist = "org.javassist:javassist:3.23.1-GA"
   val `javax-inject` = "javax.inject:javax.inject:1"
   val Jaxen = "jaxen:jaxen:1.1.6"
+  val `jaxb-api` = "javax.xml.bind:jaxb-api:2.3.0"
   val jayatana = ":jayatana:1.2.4"
   val jcip = "net.jcip:jcip-annotations:1.0"
   val jdom = "org.jetbrains.intellij.deps:jdom:2.0.6"
@@ -98,7 +102,7 @@ object Dependencies {
   val microba = ":microba:"
   val `miglayout-swing` = "com.miglayout:miglayout-swing:5.1"
   val mockito = "org.mockito:mockito-core:2.18.0"
-  val Mocks = arrayOf(":easymock:3.4", ":jmock:2.5.1", ":jmock-junit4:2.5.1", ":jmock-legacy:2.5.1", ":objenesis:1.0")
+  val Mocks = arrayOf("org.easymock:easymock:3.6", "org.jmock:jmock-junit4:$jmockVersion", "org.jmock:jmock-legacy:$jmockVersion")
   val NanoXML = "be.cyberelf.nanoxml:nanoxml:2.2.3"
   val nekohtml = "net.sourceforge.nekohtml:nekohtml:1.9.22"
   val `netty-codec-http` = "io.netty:netty-codec-http:4.1.25.Final"
@@ -126,6 +130,7 @@ object Dependencies {
   val Trove4j = "org.jetbrains.intellij.deps:trove4j:1.0.20160824"
   val truth = ":truth:0.28"
   val Velocity = "org.apache.velocity:velocity:1.7"
+  val `wadl-core` = ":wadl-core:"
   val winp = "org.jvnet.winp:winp:1.26"
   val Xerces = "xerces:xercesImpl:2.11.0"
   val `xml-apis-ext` = "xml-apis:xml-apis-ext:1.3.04"

@@ -3,9 +3,6 @@ plugins {
 }
 
 configure<JavaPluginConvention> {
-  sourceCompatibility = JavaVersion.VERSION_1_10
-  targetCompatibility = JavaVersion.VERSION_1_10
-
   val sourceSet = sourceSets["main"]
   sourceSet.java.srcDirs.clear()
   sourceSet.java.srcDir("src")
@@ -28,12 +25,11 @@ dependencies {
   implementation(project(":intellij.xml.dom"))
   implementation(project(":intellij.java.guiForms.rt"))
   implementation(project(":intellij.platform.icons"))
-  implementation("org.jetbrains.intellij.deps", "jdom", "2.0.6")
-  implementation("org.jetbrains.intellij.deps", "trove4j", "1.0.20160824")
-  implementation("be.cyberelf.nanoxml", "nanoxml", "2.2.3")
-  implementation("com.jgoodies", "forms", "1.1-preview")
-  implementation("org.apache.xmlrpc", "xmlrpc", "3.1.3")
+  implementation(Dependencies.jdom)
+  implementation(Dependencies.Trove4j)
+  implementation(Dependencies.NanoXML)
+  implementation(Dependencies.`jgoodies-forms`)
+  implementation(Dependencies.XmlRPC)
 
-  testImplementation("junit", "junit", "4.12")
-  testImplementation("org.hamcrest", "hamcrest-core", "1.3")
+  testImplementation(Dependencies.JUnit4)
 }

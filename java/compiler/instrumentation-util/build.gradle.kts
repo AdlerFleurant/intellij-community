@@ -3,9 +3,6 @@ plugins {
 }
 
 configure<JavaPluginConvention> {
-  sourceCompatibility = JavaVersion.VERSION_1_10
-  targetCompatibility = JavaVersion.VERSION_1_10
-
   val sourceSet = sourceSets["main"]
   sourceSet.java.srcDirs.clear()
   sourceSet.java.srcDir("src")
@@ -13,5 +10,5 @@ configure<JavaPluginConvention> {
 }
 
 dependencies {
-  implementation("org.jetbrains.intellij.deps", "asm-all", "6.1-beta2")
+  implementation(Dependencies.asm)
 }

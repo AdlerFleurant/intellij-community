@@ -147,7 +147,7 @@ public class ImageDuplicateResultsDialog extends DialogWrapper {
         @Override
         public void run(AnActionButton button) {
           final Module[] all = ModuleManager.getInstance(myProject).getModules();
-          Arrays.sort(all, (o1, o2) -> o1.getName().compareTo(o2.getName()));
+          Arrays.sort(all, Comparator.comparing(Module::getName));
           final JBList modules = new JBList(all);
           modules.installCellRenderer(modulesRenderer);
           JBPopupFactory.getInstance().createListPopupBuilder(modules)

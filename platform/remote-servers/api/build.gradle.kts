@@ -1,13 +1,9 @@
-// Copyright 2000-2018 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
 plugins {
   `java-library`
-  kotlin("jvm") version "1.2.51"
+  kotlin("jvm")
 }
 
 configure<JavaPluginConvention> {
-  sourceCompatibility = JavaVersion.VERSION_1_10
-  targetCompatibility = JavaVersion.VERSION_1_10
-
   val sourceSet = sourceSets["main"]
   sourceSet.java.srcDirs.clear()
   sourceSet.java.srcDir("src")
@@ -26,5 +22,5 @@ dependencies {
 
   implementation(project(":intellij.platform.core"))
   implementation(project(":intellij.platform.lang"))
-  implementation("org.jetbrains.intellij.deps", "jdom", "2.0.6")
+  implementation(Dependencies.jdom)
 }

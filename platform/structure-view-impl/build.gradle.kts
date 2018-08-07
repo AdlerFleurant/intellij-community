@@ -3,9 +3,6 @@ plugins {
 }
 
 configure<JavaPluginConvention> {
-  sourceCompatibility = JavaVersion.VERSION_1_10
-  targetCompatibility = JavaVersion.VERSION_1_10
-
   val sourceSet = sourceSets["main"]
   sourceSet.java.srcDirs.clear()
   sourceSet.java.srcDir("src")
@@ -23,6 +20,6 @@ dependencies {
   implementation(project(":intellij.platform.icons"))
   implementation(project(":intellij.platform.bootstrap"))
   implementation(project(":intellij.platform.ide"))
-  implementation("org.picocontainer", "picocontainer", "1.2")
-  implementation("dk.brics", "automaton", "1.12-1")
+  implementation(Dependencies.picocontainer)
+  implementation(Dependencies.automaton)
 }

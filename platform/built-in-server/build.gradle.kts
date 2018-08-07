@@ -1,6 +1,6 @@
 plugins {
   `java-library`
-  kotlin("jvm") version Versions.`kotlin-jvm`
+  kotlin("jvm")
 }
 
 tasks {

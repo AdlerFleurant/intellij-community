@@ -3,9 +3,6 @@ plugins {
 }
 
 configure<JavaPluginConvention> {
-  sourceCompatibility = JavaVersion.VERSION_1_10
-  targetCompatibility = JavaVersion.VERSION_1_10
-
   val sourceSet = sourceSets["main"]
   sourceSet.java.srcDirs.clear()
   sourceSet.java.srcDir("src")
@@ -23,6 +20,6 @@ dependencies {
   implementation(project(":intellij.platform.lang"))
   implementation(project(":intellij.xml"))
   implementation(project(":intellij.platform.resources"))
-  implementation(rootProject.files("lib/cglib-nodep-3.2.4.jar"))
+  implementation(Dependencies.CGLIB)
 
 }

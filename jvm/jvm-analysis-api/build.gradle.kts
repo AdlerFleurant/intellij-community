@@ -2,11 +2,6 @@ plugins {
   `java-library`
 }
 
-configure<JavaPluginConvention> {
-  sourceCompatibility = JavaVersion.VERSION_1_10
-  targetCompatibility = JavaVersion.VERSION_1_10
-}
-
 dependencies {
   api(project(":uast:uast-java"))
   api(project(":intellij.java.psi"))
