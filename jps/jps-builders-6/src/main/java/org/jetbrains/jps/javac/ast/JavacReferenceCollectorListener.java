@@ -4,7 +4,6 @@ package org.jetbrains.jps.javac.ast;
 import com.intellij.util.Consumer;
 import com.sun.source.tree.*;
 import com.sun.source.util.*;
-import com.sun.tools.javac.util.ClientCodeException;
 import gnu.trove.THashSet;
 import gnu.trove.TObjectIntHashMap;
 import org.jetbrains.annotations.Nullable;
@@ -151,7 +150,7 @@ final class JavacReferenceCollectorListener implements TaskListener {
       }
     }
     catch (Exception ex) {
-      throw new ClientCodeException(ex);
+      throw new RuntimeException(ex);
     }
   }
 
