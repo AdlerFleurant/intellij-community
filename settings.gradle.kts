@@ -105,6 +105,7 @@ include(
   "intellij.java.impl",
   "intellij.jvm.analysis",
   "intellij.jvm.analysis.impl",
+  "intellij.java.aetherDependencyResolver",
   "intellij.platform.jps.build.javac.rt"
   //  "intellij.java.compiler.impl",
   //  "intellij.java.compiler.tests"
@@ -208,6 +209,7 @@ project(":intellij.java.analysis.impl").projectDir = file("java/java-analysis-im
 project(":intellij.java.impl").projectDir = file("java/java-impl")
 project(":intellij.jvm.analysis").projectDir = file("jvm/jvm-analysis-api")
 project(":intellij.jvm.analysis.impl").projectDir = file("jvm/jvm-analysis-impl")
+project(":intellij.java.aetherDependencyResolver").projectDir = file("aether-dependency-resolver")
 project(":intellij.platform.jps.build.javac.rt").projectDir = file("jps/jps-builders-6")
 //project(":intellij.java.compiler.impl").projectDir = file("java/compiler/impl")
 //project(":intellij.java.compiler.tests").projectDir = file("java/compiler/tests")

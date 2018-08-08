@@ -7,6 +7,7 @@ configure<JavaPluginConvention> {
   sourceSet.java.srcDirs.clear()
   sourceSet.java.srcDir("src")
   sourceSet.resources.srcDirs.clear()
+  sourceSet.resources.srcDir("resources")
 }
 
 dependencies {
